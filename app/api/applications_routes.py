@@ -6,7 +6,7 @@ import os
 
 application_routes = Blueprint("applications", __name__)
 
-
+##Get routes
 @application_routes.route("/")
 def application_data():
     """
@@ -20,7 +20,13 @@ def application_data():
         returncomp = {'applications': names}
         return returncomp
 
+@application_routes.route("/<application_id>/interviews")
+def application_data():
+    """
+    Provides all interviews associated with application
+    """
 
+## Post Routes
 @application_routes.route("/", methods=["POST"])
 def create_application():
 
@@ -48,3 +54,18 @@ def create_application():
     return {"errors": errorMessages}, 401
     # company_name = Company.query.get(form.data["company_id"])
     #     print("Success! ===================")
+
+
+##Patch Routes
+@application_routes.route("/<application_id>", methods=["PATCH"])
+def application_data():
+    """
+    Updates info for an application
+    """
+
+##Delete Routes
+@application_routes.route("/<application_id>", methods=["DELETE"])
+def application_data():
+    """
+    Deletes an application
+    """

@@ -17,3 +17,19 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>')
+@login_required
+def user(id):
+    """
+    Get user information
+    """
+
+
+@user_routes.route('/<int:id>', methods=["PATCH"])
+@login_required
+def user(id):
+    """
+    Update user information
+    """

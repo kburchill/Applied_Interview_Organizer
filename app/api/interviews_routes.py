@@ -5,7 +5,7 @@ import os
 
 interview_routes = Blueprint("interviews", __name__)
 
-
+##Get routes
 @interview_routes.route("/")
 def interview_data():
     """
@@ -18,3 +18,24 @@ def interview_data():
             names.append(interview.contact_name)
         returncomp = {'interviews': names}
         return returncomp
+
+##Post Routes
+@interview_routes.route("/", methods=["POST"])
+def interview_data():
+    """
+    Create an interview
+    """
+
+##Patch Routes
+@interview_routes.route("/<interview_id>", methods=["PATCH"])
+def interview_data():
+    """
+    Update an interview
+    """
+
+##Delete Routes
+@interview_routes.route("/<interview_id>", methods=["DELETE"])
+def interview_data():
+    """
+    Delete an interview
+    """

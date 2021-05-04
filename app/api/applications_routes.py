@@ -6,19 +6,34 @@ import os
 
 application_routes = Blueprint("applications", __name__)
 
-##Get routes
+# Get routes
+
+
 @application_routes.route("/")
 def application_data():
     """
     Provides all applications associated with current user
     """
+
     if (current_user.is_authenticated):
-        applications = Application.query.all()
-        names = []
-        for application in applications:
-            names.append(application.company_id)
-        returncomp = {'applications': names}
-        return returncomp
+        query_applications = Application.query.filter(
+            Application.user_id == current_user.id)
+        applications = {}
+        for application in query_applications:
+            application_info = []
+            application_info.append(
+                {
+                    'sent_out': application.sent_out,
+                    'response': application.response,
+                    'response_date': application.response_date,
+                    'interview': application.interview,
+                    'company_id': application.company_id,
+                    'user_id': application.user_id,
+                    'interview_id': application.interview_id
+                })
+            applications[application.id] = application_info[0]
+        return applications
+
 
 @application_routes.route("/<int:application_id>/interviews")
 def application_interviews_data():
@@ -26,13 +41,14 @@ def application_interviews_data():
     Provides all interviews associated with application
     """
 
-## Post Routes
+# Post Routes
+
+
 @application_routes.route("/", methods=["POST"])
 def create_application():
 
     form = ApplicationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
     if form.validate_on_submit():
         new_application = Application(
             sent_out=form.data["sent_out"],
@@ -44,26 +60,44 @@ def create_application():
         )
         db.session.add(new_application)
         db.session.commit()
-        return {'message': 'Application added'}
+        application_info = []
+        application_info.append(
+            {
+                'sent_out': new_application.sent_out,
+                'response': new_application.response,
+                'response_date': new_application.response_date,
+                'interview': new_application.interview,
+                'company_id': new_application.company_id,
+                'user_id': new_application.user_id,
+                'interview_id': new_application.interview_id
+            })
+        application = {'application': [new_application.id, application_info[0]]}
+        return application
+
     validation_errors = form.errors
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
             errorMessages.append(f"{field} : {error}")
-    print(errorMessages)
     return {"errors": errorMessages}, 401
 
 
-##Patch Routes
+# Patch Routes
 @application_routes.route("/<int:application_id>", methods=["PATCH"])
 def application_update():
     """
     Updates info for an application
     """
 
-##Delete Routes
+# Delete Routes
+
+
 @application_routes.route("/<int:application_id>", methods=["DELETE"])
-def application_delete():
+def application_delete(application_id):
     """
     Deletes an application
     """
+    application_to_delete = Application.query.get(application_id)
+    db.session.delete(application_to_delete)
+    db.session.commit()
+    return {'message': 'Application Deleted.'}

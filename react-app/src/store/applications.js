@@ -31,7 +31,6 @@ export const get_applications = () => async (dispatch) => {
       'Content-Type': 'application/json'
     }
   });
-
   if (response.ok) {
     const applications = await response.json();
     dispatch(load(applications))
@@ -91,18 +90,16 @@ export const update_application = (info) => async (dispatch) => {
 
 //Delete an application
 export const delete_application = (application_id) => async (dispatch) => {
-
   const response = await fetch(`/api/applications/${application_id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     }
   });
-
   if (response.ok) {
-    const application = await response.json();
-    dispatch(remove(application))
-    return application;
+    const app = await response.json()
+    dispatch(remove(application_id))
+    return application_id;
   }
 }
 
@@ -111,14 +108,16 @@ const initialState = {}
 const applicationReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
-      state['applications'] = action.payload['applications']
+      state = action.payload
       return state
     case ADD:
-    //Add an application to a state
+      const new_app = action.payload.application
+      state[new_app[0]] = new_app[1]
     case EDIT:
     //Edit an application in state
     case REMOVE:
-    //Remove an application from state
+      const key = action.payload
+      delete state[key]
     default:
       return state
   }

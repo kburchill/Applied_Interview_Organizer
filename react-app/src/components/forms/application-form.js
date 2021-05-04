@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { create_application } from '../../store/applications'
+import { create_application, get_applications} from '../../store/applications'
 
 
 const CreateApplicationForm = () => {
@@ -13,9 +13,9 @@ const CreateApplicationForm = () => {
   const [company_id, setCompany_id] = useState(1);
   const [sent_out, setSent_date] = useState(new Date())
   const [response, setResponse] = useState(false);
-  const [response_date, setResponse_date] = useState(new Date());
+  const [response_date, setResponse_date] = useState();
   const [interview, setInterview] = useState(false);
-  const [interview_date, setInterview_date] = useState(new Date());
+  const [interview_date, setInterview_date] = useState();
   const [interview_contact, setInterview_contact] = useState("");
 
   const userId = user.id;
@@ -34,7 +34,8 @@ const CreateApplicationForm = () => {
   const submitApplication = async (e) => {
     e.preventDefault();
     //call fetch function
-    dispatch(create_application(info))
+    await dispatch(create_application(info))
+    await dispatch(get_applications())
   }
   //We can add update in here and use this form
 

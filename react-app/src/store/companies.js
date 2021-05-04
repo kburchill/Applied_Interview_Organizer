@@ -1,6 +1,5 @@
 const LOAD = "companies/LOAD";
 const ADD = "companies/ADD";
-const REMOVE = "companies/REMOVE";
 
 const load = companies => ({
   type: LOAD,
@@ -12,12 +11,8 @@ const add = company => ({
   payload: company
 })
 
-const remove = company => ({
-  type: REMOVE,
-  payload: company
-})
 
-
+//Get all companies
 export const get_companies = () => async (dispatch) => {
   const response = await fetch('/api/companies/', {
     headers: {
@@ -29,7 +24,25 @@ export const get_companies = () => async (dispatch) => {
     dispatch(load(companies))
     return companies;
   }
+}
 
+// Create a company
+export const create_company = (info) => async (dispatch) => {
+  const response = await fetch('/api/companies/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      info
+    })
+  });
+
+  if (response.ok) {
+    const company = await response.json();
+    dispatch(add(company))
+    return company;
+  }
 }
 
 const initialState = {}
@@ -39,6 +52,7 @@ const companyReducer = (state = initialState, action) => {
     case LOAD:
       state.companies = action.payload['companies']
       return state
+    case ADD:
     default:
       return state
   }

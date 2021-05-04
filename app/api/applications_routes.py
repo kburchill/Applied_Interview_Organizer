@@ -20,8 +20,8 @@ def application_data():
         returncomp = {'applications': names}
         return returncomp
 
-@application_routes.route("/<application_id>/interviews")
-def application_data():
+@application_routes.route("/<int:application_id>/interviews")
+def application_interviews_data():
     """
     Provides all interviews associated with application
     """
@@ -32,12 +32,12 @@ def create_application():
 
     form = ApplicationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("THIS HAPPENED INSIDE", form.data)
+
     if form.validate_on_submit():
         new_application = Application(
             sent_out=form.data["sent_out"],
             response=form.data["response"],
-            # response_date=form.data["response_date"],
+            response_date=form.data["response_date"],
             interview=form.data["interview"],
             company_id=form.data["company_id"],
             user_id=form.data["user_id"]
@@ -52,20 +52,18 @@ def create_application():
             errorMessages.append(f"{field} : {error}")
     print(errorMessages)
     return {"errors": errorMessages}, 401
-    # company_name = Company.query.get(form.data["company_id"])
-    #     print("Success! ===================")
 
 
 ##Patch Routes
-@application_routes.route("/<application_id>", methods=["PATCH"])
-def application_data():
+@application_routes.route("/<int:application_id>", methods=["PATCH"])
+def application_update():
     """
     Updates info for an application
     """
 
 ##Delete Routes
-@application_routes.route("/<application_id>", methods=["DELETE"])
-def application_data():
+@application_routes.route("/<int:application_id>", methods=["DELETE"])
+def application_delete():
     """
     Deletes an application
     """

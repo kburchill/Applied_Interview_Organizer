@@ -66,7 +66,7 @@ export const create_application = (info) => async (dispatch) => {
 
 // Update an applicaion
 export const update_application = (info) => async (dispatch) => {
-
+  const application_id = info.application_id
   const response = await fetch(`/api/applications/${application_id}`, {
     method: 'PATCH',
     headers: {

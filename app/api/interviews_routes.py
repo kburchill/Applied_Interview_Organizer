@@ -21,21 +21,21 @@ def interview_data():
 
 ##Post Routes
 @interview_routes.route("/", methods=["POST"])
-def interview_data():
+def interview_create():
     """
     Create an interview
     """
 
 ##Patch Routes
-@interview_routes.route("/<interview_id>", methods=["PATCH"])
-def interview_data():
+@interview_routes.route("/<int:interview_id>", methods=["PATCH"])
+def interview_edit():
     """
     Update an interview
     """
 
 ##Delete Routes
-@interview_routes.route("/<interview_id>", methods=["DELETE"])
-def interview_data():
+@interview_routes.route("/<int:interview_id>", methods=["DELETE"])
+def interview_delete():
     """
     Delete an interview
     """

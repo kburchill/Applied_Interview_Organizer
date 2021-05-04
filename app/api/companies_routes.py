@@ -20,28 +20,28 @@ def company_data():
         returncomp = {'companies': names}
         return returncomp
 
-@company_routes.route("/<company_id>/applications")
-def company_data(company_id):
+@company_routes.route("/<int:company_id>/applications")
+def company_application_data(company_id):
     """
     Get all applications for current user and a company
     """
 
-@company_routes.route("/<company_id>/interviews")
-def company_data(company_id):
+@company_routes.route("/<int:company_id>/interviews")
+def company_interview_data(company_id):
     """
     Get all interviews for current user and a company
     """
 
 ## Post routes
 @company_routes.route("/", methods=["POST"])
-def company_data():
+def company_add():
     """
     Create a company
     """
 
 ## Patch routes
-@company_routes.route("/<company_id>", methods=["PATCH"])
-def company_data(company_id):
+@company_routes.route("/<int:company_id>", methods=["PATCH"])
+def company_update(company_id):
     """
     Update a company
     """

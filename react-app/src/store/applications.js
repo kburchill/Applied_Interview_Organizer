@@ -66,7 +66,7 @@ export const create_application = (info) => async (dispatch) => {
 
 // Update an applicaion
 export const update_application = (info) => async (dispatch) => {
-  const application_id = info.application_id
+  const application_id = Object.keys(info)[0]
   const response = await fetch(`/api/applications/${application_id}`, {
     method: 'PATCH',
     headers: {
@@ -84,7 +84,7 @@ export const update_application = (info) => async (dispatch) => {
 
   if (response.ok) {
     const application = await response.json();
-    dispatch(edit(application))
+    dispatch(edit(info))
     return true;
   }
   return false;
@@ -117,7 +117,9 @@ const applicationReducer = (state = initialState, action) => {
       const new_app = action.payload.application
       state[new_app[0]] = new_app[1]
     case EDIT:
-    //Edit an application in state
+      const app_id = Object.keys(action.payload)[0]
+      const app_info = Object.values(action.payload)[0]
+      state[app_id] = app_info;
     case REMOVE:
       const key = action.payload
       delete state[key]

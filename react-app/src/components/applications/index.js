@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_applications, delete_application, create_application } from "../../store/applications"
+import { get_applications, delete_application, create_application, update_application } from "../../store/applications"
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 
 const MyApplications = () => {
@@ -8,6 +8,7 @@ const MyApplications = () => {
   const applications = useSelector(state => state.applications);
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
+  const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const dispatch = useDispatch();
@@ -15,6 +16,11 @@ const MyApplications = () => {
   const openNewApplicationForm = () => {
     if (showNewApplicationForm) return;
     setShowNewApplicationForm(true);
+  };
+
+  const openEditApplicationForm = () => {
+    if (showEditApplicationForm) return;
+    setShowEditApplicationForm(true);
   };
 
   const handleDelete = async (id) => {
@@ -26,17 +32,27 @@ const MyApplications = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if(loaded){
-    renderApplications()
-    setLoaded(false)
+    if (loaded) {
+      renderApplications()
+      setLoaded(false)
     }
   }, [loaded])
 
   const submitApplication = async (e) => {
     e.preventDefault();
-    //call fetch function
     const info = form_info()
     const loaded = await dispatch(create_application(info))
+    setLoaded(loaded)
+  }
+
+  const editApplication = async (e) => {
+    e.preventDefault();
+
+    const info = form_info()
+    const id = e.target.id
+    const application_info = {}
+    application_info[id] = info;
+    const loaded = await dispatch(update_application(application_info))
     setLoaded(loaded)
   }
 
@@ -46,7 +62,14 @@ const MyApplications = () => {
         return (
           <div>
             <div>{applications[key].company_id}</div>
-            <button onClick={()=> handleDelete(key)}>Delete application</button>
+            <button onClick={() => handleDelete(key)}>Delete application</button>
+            <div>
+              <button onClick={openEditApplicationForm}>Update Application</button>
+              <form id={key} className="edit_application_form" onSubmit={editApplication}>
+                {showEditApplicationForm && <CreateApplicationForm />}
+                <button type="submit">Update</button>
+              </form>
+            </div>
           </div>
         )
       })
@@ -55,15 +78,17 @@ const MyApplications = () => {
 
   return (
     <>
-      <div>applications will be here</div>
-      <div>{renderApplications()}</div>
-      <div>Application NOT DB</div>
-      <div>Application NOT DB</div>
-      <button onClick={openNewApplicationForm}>Record New Application</button>
-      <form onSubmit={submitApplication}>
-      {showNewApplicationForm && <CreateApplicationForm />}
-      <button type="submit">I Applied!</button>
-      </form>
+      <div>
+        <div>applications will be here</div>
+        <div>{renderApplications()}</div>
+      </div>
+      <div>
+        <button onClick={openNewApplicationForm}>Record New Application</button>
+        <form className="create_application_form" onSubmit={submitApplication}>
+          {showNewApplicationForm && <CreateApplicationForm />}
+          <button type="submit">I Applied!</button>
+        </form>
+      </div>
     </>
   )
 }

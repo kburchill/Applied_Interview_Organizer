@@ -71,7 +71,8 @@ def create_application():
                 'user_id': new_application.user_id,
                 'interview_id': new_application.interview_id
             })
-        application = {'application': [new_application.id, application_info[0]]}
+        application = {'application': [
+            new_application.id, application_info[0]]}
         return application
 
     validation_errors = form.errors
@@ -84,11 +85,25 @@ def create_application():
 
 # Patch Routes
 @application_routes.route("/<int:application_id>", methods=["PATCH"])
-def application_update():
+def application_update(application_id):
     """
     Updates info for an application
     """
+    application = Application.query.get(application_id)
 
+    form = ApplicationForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        application.sent_out = form.data["sent_out"],
+        application.response = form.data["response"],
+        application.response_date = form.data["response_date"],
+        application.interview = form.data["interview"],
+        application.company_id = form.data["company_id"],
+        application.user_id = form.data["user_id"]
+
+        db.session.commit()
+    return {'message': 'Update complete'}
+    
 # Delete Routes
 
 

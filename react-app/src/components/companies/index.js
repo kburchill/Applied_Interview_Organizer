@@ -57,8 +57,8 @@ const MyCompanies = () => {
 
         <form className="create_company_form" onSubmit={submitCompany}>
           {showNewCompanyForm && <div onClick={()=> setShowNewCompanyForm(false)}>X</div> }
-          {showNewCompanyForm && <CreateCompanyForm /> }
-          <button type="submit">Submit</button>
+          {showNewCompanyForm && <CreateCompanyForm />}
+          {showNewCompanyForm && <button type="submit">Submit</button>}
         </form>
       </div>
     </div>

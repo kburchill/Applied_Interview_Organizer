@@ -102,6 +102,7 @@ const MyInterviews = () => {
       <div>
         <button onClick={openNewInterviewForm}>Record New Interview</button>
         <form className="create_Interview_form" onSubmit={submitInterview}>
+          {showNewInterviewForm && <div onClick={()=> setShowNewInterviewForm(false)}>X</div>}
           {showNewInterviewForm && <CreateInterviewForm />}
           <button type="submit">Create Interview!</button>
         </form>

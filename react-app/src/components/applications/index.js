@@ -112,6 +112,7 @@ const MyApplications = () => {
       <div>
         <button onClick={openNewApplicationForm}>Record New Application</button>
         <form className="create_application_form" onSubmit={submitApplication}>
+          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X</div>}
           {showNewApplicationForm && <CreateApplicationForm />}
           <button type="submit">I Applied!</button>
         </form>

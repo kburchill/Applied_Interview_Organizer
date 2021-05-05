@@ -85,8 +85,9 @@ export const update_application = (info) => async (dispatch) => {
   if (response.ok) {
     const application = await response.json();
     dispatch(edit(application))
-    return application;
+    return true;
   }
+  return false;
 }
 
 //Delete an application

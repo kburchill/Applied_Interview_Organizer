@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { create_application, get_applications } from '../../store/applications'
 
 
+let info = {}
+
+export const form_info = () => {
+  return info;
+}
+
 const CreateApplicationForm = () => {
   //Stores
   const user = useSelector(state => state.session.user)
-
-  const dispatch = useDispatch();
 
   //States
   const [company_id, setCompany_id] = useState(1);
@@ -20,7 +24,7 @@ const CreateApplicationForm = () => {
 
   const userId = user.id;
 
-  const info = {
+  info = {
     user_id: userId,
     sent_out: sent_out,
     company_id: company_id,
@@ -31,16 +35,10 @@ const CreateApplicationForm = () => {
     interview_contact: interview_contact,
   }
 
-  const submitApplication = async (e) => {
-    e.preventDefault();
-    //call fetch function
-    await dispatch(create_application(info))
-    await dispatch(get_applications())
-  }
+
   //We can add update in here and use this form
 
   return (
-    <form onSubmit={submitApplication}>
       <div>
         <label>Where did you apply?</label>
         <select onChange={(e) => setCompany_id(e.target.value)}>
@@ -93,8 +91,7 @@ const CreateApplicationForm = () => {
           className="form-input"
         />
       </div>
-      <button type="submit">I Applied!</button>
-    </form>
+
   );
 };
 

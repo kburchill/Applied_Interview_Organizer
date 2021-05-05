@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_applications, delete_application, create_application, update_application } from "../../store/applications"
+import { create_interview } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 
 const MyApplications = () => {
@@ -41,7 +42,18 @@ const MyApplications = () => {
   const submitApplication = async (e) => {
     e.preventDefault();
     const info = form_info()
+    const interview_info = {
+      company_id: info.company_id,
+      user_id: info.user_id,
+      date: info.interview_date,
+      contact_name: info.interview_contact,
+      completed: false,
+      interview_type: info.interview_type
+    }
     const loaded = await dispatch(create_application(info))
+    if(info.response){
+      await dispatch(create_interview(interview_info))
+    }
     setLoaded(loaded)
   }
 

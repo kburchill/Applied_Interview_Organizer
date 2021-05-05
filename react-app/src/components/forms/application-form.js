@@ -20,6 +20,7 @@ const CreateApplicationForm = () => {
   const [interview, setInterview] = useState(false);
   const [interview_date, setInterview_date] = useState();
   const [interview_contact, setInterview_contact] = useState("");
+  const [interview_type, setInterview_type] = useState("");
 
   const userId = user.id;
 
@@ -32,6 +33,7 @@ const CreateApplicationForm = () => {
     interview: interview,
     interview_date: interview_date,
     interview_contact: interview_contact,
+    interview_type: interview_type
   }
 
 
@@ -87,6 +89,14 @@ const CreateApplicationForm = () => {
           name="contact-name"
           value={interview_contact}
           onChange={(e) => setInterview_contact(e.target.value)}
+          className="form-input"
+        />
+        <label hidden={!interview}>Who type of interview is this?</label>
+        <textarea
+          hidden={!interview}
+          name="contact-name"
+          value={interview_type}
+          onChange={(e) => setInterview_type(e.target.value)}
           className="form-input"
         />
       </div>

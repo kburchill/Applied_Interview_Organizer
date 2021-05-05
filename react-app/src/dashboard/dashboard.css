@@ -1,0 +1,68 @@
+
+.main__container {
+  height: 100vh;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 50% 30%;
+	grid-template-rows: 50px 1fr;
+	grid-template-areas:
+		"navbar navbar navbar"
+		"labels body extra";
+}
+
+.navbar-block {
+  grid-area: navbar;
+}
+.companies-block {
+  grid-area: body;
+	visibility: hidden;
+	width: 25%;
+}
+.companies-block > * {
+	visibility: hidden;
+	width: 25%;
+}
+.applications-block {
+  grid-area: body;
+	visibility: hidden;
+	width: 25%;
+}
+.applications-block > *{
+	visibility: hidden;
+	width: 25%;
+}
+.interviews-block {
+  grid-area: body;
+	visibility: hidden;
+	width: 25%;
+}
+.interviews-block > * {
+	visibility: hidden;
+	width: 25%;
+}
+
+.show-block-info {
+	grid-area: body;
+	border: 1px solid black;
+	visibility: visible;
+	width: 100%;
+	transition: all 5s ease 0s;
+}
+
+.show-block-info > * > * > * {
+	grid-area: body;
+	border: 1px solid black;
+	visibility: visible;
+	width: 100%;
+	transition: all 1s ease 0s;
+}
+.container-labels{
+	grid-area: labels;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.container-labels > *:hover {
+	background-color: red;
+}

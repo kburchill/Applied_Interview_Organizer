@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_companies, create_company } from "../../store/companies"
 import CreateCompanyForm, { form_info } from "../forms/company-form"
 import './companies.css'
+
+
 const MyCompanies = () => {
   const companies = useSelector(state => state.companies);
   const user = useSelector(state => state.user);
@@ -42,21 +44,23 @@ const MyCompanies = () => {
     return (
       companies && Object.values(companies).map(company => {
         return (
-          <div>{company.name}</div>
+          <div className="each-company">
+            <div>{company.name}</div>
+          </div>
         )
       })
     )
   }
 
   return (
-    <div className="companies-block">
+    <div className="companies-block" id="companies-block">
       <div>Companies will be here</div>
       <div>{renderCompanies()}</div>
       <div>
         <button onClick={openNewCompanyForm}>Add Company</button>
 
         <form className="create_company_form" onSubmit={submitCompany}>
-          {showNewCompanyForm && <div onClick={()=> setShowNewCompanyForm(false)}>X</div> }
+          {showNewCompanyForm && <div onClick={() => setShowNewCompanyForm(false)}>X</div>}
           {showNewCompanyForm && <CreateCompanyForm />}
           {showNewCompanyForm && <button type="submit">Submit</button>}
         </form>

@@ -85,7 +85,7 @@ const MyApplications = () => {
     return (
       applications && Object.keys(applications).map(key => {
         return (
-          <div>
+          <div className="each-application">
             <div>{applications[key].company_id}</div>
             <button onClick={() => handleDelete(key)}>Delete application</button>
             <div>
@@ -104,7 +104,7 @@ const MyApplications = () => {
   }
 
   return (
-    <div className="applications-block" hidden={user}>
+    <div className="applications-block" id="applications-block">
       <div>
         <div>applications will be here</div>
         <div>{renderApplications()}</div>

@@ -1,0 +1,9 @@
+
+.navbar-block{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-block > * {
+  border: 1px solid red;
+}

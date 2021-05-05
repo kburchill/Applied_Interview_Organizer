@@ -3,13 +3,9 @@ import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
-import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import UsersList from "./components/UsersList";
 import User from "./components/User";
-import MyCompanies from "./components/companies"
-import MyInterviews from "./components/interviews"
-import MyApplications from "./components/applications"
+import MainBody from "./dashboard/"
 import IntroPage from "./components/introPage"
 
 
@@ -34,7 +30,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
       <Switch>
         <Route path="/" exact={true}>
           <IntroPage />
@@ -46,11 +41,7 @@ function App() {
           <SignUpForm />
         </Route>
         <ProtectedRoute path="/dashboard" exact={true} >
-          <div className="main__container">
-            <MyCompanies />
-            <MyApplications />
-            <MyInterviews />
-          </div>
+            <MainBody />
         </ProtectedRoute>
         {/* <ProtectedRoute path="/users" exact={true} >
           <UsersList />

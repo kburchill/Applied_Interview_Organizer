@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_applications, delete_application } from "../../store/applications"
+import { get_applications, delete_application, show_applications } from "../../store/applications"
 import CreateApplicationForm from "../forms/application-form"
 
 const MyApplications = () => {
@@ -8,6 +8,8 @@ const MyApplications = () => {
   const applications = useSelector(state => state.applications);
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
   const dispatch = useDispatch();
 
   const openNewApplicationForm = () => {
@@ -15,17 +17,21 @@ const MyApplications = () => {
     setShowNewApplicationForm(true);
   };
 
+
   const handleDelete = async (id) => {
-    await dispatch(delete_application(id))
-    await dispatch(get_applications())
+    const rerender = await dispatch(delete_application(id))
+    setRerender(rerender)
   }
   useEffect(() => {
     dispatch(get_applications())
   }, [dispatch])
 
   useEffect(() => {
+    if(rerender){
     renderApplications()
-  }, [applications.length])
+    setRerender(false)
+    }
+  }, [rerender])
 
   const renderApplications = () => {
     return (

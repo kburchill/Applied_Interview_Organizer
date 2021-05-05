@@ -2,6 +2,7 @@ const LOAD = "applications/LOAD";
 const ADD = "applications/ADD";
 const REMOVE = "applications/REMOVE";
 const EDIT = 'applications/EDIT';
+const SHOW = 'applications/SHOW';
 
 const load = applications => ({
   type: LOAD,
@@ -99,8 +100,9 @@ export const delete_application = (application_id) => async (dispatch) => {
   if (response.ok) {
     const app = await response.json()
     dispatch(remove(application_id))
-    return application_id;
+    return true;
   }
+  return false;
 }
 
 const initialState = {}
@@ -118,6 +120,7 @@ const applicationReducer = (state = initialState, action) => {
     case REMOVE:
       const key = action.payload
       delete state[key]
+      return state
     default:
       return state
   }

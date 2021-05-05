@@ -34,15 +34,21 @@ export const create_company = (info) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      info
+      name: info.name,
+      state: info.state,
+      city: info.city,
+      address_1: info.address_1,
+      address_2: info.address_2,
+      job_openings: info.job_openings
     })
   });
 
   if (response.ok) {
     const company = await response.json();
     dispatch(add(company))
-    return company;
+    return true;
   }
+  return false;
 }
 
 const initialState = {}
@@ -50,9 +56,11 @@ const initialState = {}
 const companyReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
-      state.companies = action.payload['companies']
+      state = action.payload
       return state
     case ADD:
+      const new_company = action.payload.company
+      state[new_company[0]] = new_company[1]
     default:
       return state
   }

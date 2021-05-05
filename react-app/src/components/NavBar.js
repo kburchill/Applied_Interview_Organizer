@@ -4,7 +4,7 @@ import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className="navbar-block">
       <ul>
         <li>
           <NavLink to="/" exact={true} activeClassName="active">
@@ -21,9 +21,24 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/users" exact={true} activeClassName="active">
             Users
+          </NavLink>
+        </li> */}
+        <li>
+          <NavLink to="/companies" exact={true} activeClassName="active">
+            Companies
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/applications" exact={true} activeClassName="active">
+            Applications
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/interviews" exact={true} activeClassName="active">
+            Interviews
           </NavLink>
         </li>
         <li>

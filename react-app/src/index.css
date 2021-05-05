@@ -1,1 +1,24 @@
 /* TODO Add site wide styles */
+.main__container {
+  height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 20% 40% 40%;
+	grid-template-rows: 50px 1fr;
+	grid-template-areas:
+		"navbar navbar navbar"
+		"companies applications interviews";
+}
+
+.navbar-block {
+  grid-area: navbar;
+}
+.companies-block {
+  grid-area: companies;
+}
+.applications-block {
+  grid-area: applications;
+}
+.interviews-block {
+  grid-area: interviews;
+}

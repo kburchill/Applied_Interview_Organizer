@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_applications, delete_application, create_application, update_application } from "../../store/applications"
 import { create_interview } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
+import './applications.css'
 
 const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications);
+  const user = useSelector(state => state.user);
+
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
+  const [selectedApplication, setSelectedApplication] = useState()
   const [loaded, setLoaded] = useState(false);
 
   const dispatch = useDispatch();
@@ -19,9 +23,16 @@ const MyApplications = () => {
     setShowNewApplicationForm(true);
   };
 
-  const openEditApplicationForm = () => {
+  const openEditApplicationForm = (application_id) => {
     if (showEditApplicationForm) return;
+    setSelectedApplication(application_id)
     setShowEditApplicationForm(true);
+  };
+
+  const closeApplicationForm = () => {
+    setSelectedApplication(null)
+    setShowEditApplicationForm(false);
+    setShowNewApplicationForm(false);
   };
 
   const handleDelete = async (id) => {
@@ -51,10 +62,11 @@ const MyApplications = () => {
       interview_type: info.interview_type
     }
     const loaded = await dispatch(create_application(info))
-    if(info.response){
+    if (info.response) {
       await dispatch(create_interview(interview_info))
     }
-    setLoaded(loaded)
+    setLoaded(loaded);
+    closeApplicationForm();
   }
 
   const editApplication = async (e) => {
@@ -66,6 +78,7 @@ const MyApplications = () => {
     application_info[id] = info;
     const loaded = await dispatch(update_application(application_info))
     setLoaded(loaded)
+    closeApplicationForm();
   }
 
   const renderApplications = () => {
@@ -76,11 +89,13 @@ const MyApplications = () => {
             <div>{applications[key].company_id}</div>
             <button onClick={() => handleDelete(key)}>Delete application</button>
             <div>
-              <button onClick={openEditApplicationForm}>Update Application</button>
-              <form id={key} className="edit_application_form" onSubmit={editApplication}>
-                {showEditApplicationForm && <CreateApplicationForm />}
-                <button type="submit">Update</button>
-              </form>
+              <button onClick={() => openEditApplicationForm(key)}>Update Application</button>
+              {(selectedApplication == key) &&
+                <form id={key} className="edit_application_form" onSubmit={editApplication}>
+                  <div onClick={() => closeApplicationForm()}>X</div>
+                  {showEditApplicationForm && <CreateApplicationForm />}
+                  <button type="submit">Update</button>
+                </form>}
             </div>
           </div>
         )
@@ -89,7 +104,7 @@ const MyApplications = () => {
   }
 
   return (
-    <>
+    <div className="applications-block" hidden={user}>
       <div>
         <div>applications will be here</div>
         <div>{renderApplications()}</div>
@@ -101,7 +116,7 @@ const MyApplications = () => {
           <button type="submit">I Applied!</button>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LoginForm from "./components/auth/LoginForm";
 import SignUpForm from "./components/auth/SignUpForm";
@@ -10,6 +10,7 @@ import User from "./components/User";
 import MyCompanies from "./components/companies"
 import MyInterviews from "./components/interviews"
 import MyApplications from "./components/applications"
+import IntroPage from "./components/introPage"
 
 
 // import { authenticate } from "./services/auth";
@@ -21,7 +22,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate())
       setLoaded(true);
     })();
@@ -35,26 +36,27 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
+        <Route path="/" exact={true}>
+          <IntroPage />
+        </Route>
         <Route path="/login" exact={true}>
           <LoginForm />
         </Route>
         <Route path="/sign-up" exact={true}>
           <SignUpForm />
         </Route>
-        <ProtectedRoute path="/users" exact={true} >
-          <UsersList/>
+        <ProtectedRoute path="/dashboard" exact={true} >
+          <div className="main__container">
+            <MyCompanies />
+            <MyApplications />
+            <MyInterviews />
+          </div>
         </ProtectedRoute>
+        {/* <ProtectedRoute path="/users" exact={true} >
+          <UsersList />
+        </ProtectedRoute> */}
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/companies" exact={true}>
-          <MyCompanies />
-        </ProtectedRoute>
-        <ProtectedRoute path="/interviews" exact={true}>
-          <MyInterviews />
-        </ProtectedRoute>
-        <ProtectedRoute path="/applications" exact={true}>
-          <MyApplications />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>

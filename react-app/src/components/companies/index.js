@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_companies, create_company } from "../../store/companies"
 import CreateCompanyForm, { form_info } from "../forms/company-form"
-
+import './companies.css'
 const MyCompanies = () => {
   const companies = useSelector(state => state.companies);
+  const user = useSelector(state => state.user);
+
 
   const [showNewCompanyForm, setShowNewCompanyForm] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -31,8 +33,9 @@ const MyCompanies = () => {
     e.preventDefault();
     const info = form_info()
 
-    const loaded = await dispatch(create_company(info))
-    setLoaded(loaded)
+    const loaded = await dispatch(create_company(info));
+    setLoaded(loaded);
+    setShowNewCompanyForm(false);
   }
 
   const renderCompanies = () => {
@@ -46,7 +49,7 @@ const MyCompanies = () => {
   }
 
   return (
-    <>
+    <div className="companies-block">
       <div>Companies will be here</div>
       <div>{renderCompanies()}</div>
       <div>
@@ -56,7 +59,7 @@ const MyCompanies = () => {
           <button type="submit">Submit</button>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

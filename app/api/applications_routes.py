@@ -103,7 +103,7 @@ def application_update(application_id):
 
         db.session.commit()
     return {'message': 'Update complete'}
-    
+
 # Delete Routes
 
 

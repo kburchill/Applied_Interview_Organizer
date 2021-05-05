@@ -83,7 +83,7 @@ export const update_application = (info) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const application = await response.json();
+    await response.json();
     dispatch(edit(info))
     return true;
   }
@@ -99,7 +99,7 @@ export const delete_application = (application_id) => async (dispatch) => {
     }
   });
   if (response.ok) {
-    const app = await response.json()
+    await response.json()
     dispatch(remove(application_id))
     return true;
   }

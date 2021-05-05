@@ -74,18 +74,27 @@ export const get_company_interviews = (company_id) => async (dispatch) => {
 
 // Create an interview
 export const create_interview = (info) => async (dispatch) => {
-  const response = await fetch('/api/interview/', {
+  console.log("INSIDE FETCH STORE", info)
+  const response = await fetch('/api/interviews/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      info
+      'company_id': info.company_id,
+      'user_id': info.user_id,
+      'date': info.date,
+      'contact_name': info.contact_name,
+      'completed': info.completed,
+      'company_id': info.company_id,
+      'user_id': info.user_id,
+      'interview_type': info.interview_type
     })
   });
 
   if (response.ok) {
     const interview = await response.json();
+    console.log(interview)
     dispatch(add(interview))
     return interview;
   }
@@ -93,8 +102,8 @@ export const create_interview = (info) => async (dispatch) => {
 
 // Update an interview
 export const update_interview = (info) => async (dispatch) => {
-  const interview_id = info.interview_id
-  const response = await fetch(`/api/interview/${interview_id}`, {
+  const interview_id = Object.keys(info)[0]
+  const response = await fetch(`/api/interviews/${interview_id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
@@ -110,15 +119,15 @@ export const update_interview = (info) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const application = await response.json();
-    dispatch(edit(application))
-    return application;
+    await response.json();
+    dispatch(edit(info))
+    return true;
   }
+  return false;
 }
 
 //Delete an interview
 export const delete_interview = (interview_id) => async (dispatch) => {
-
   const response = await fetch(`/api/interviews/${interview_id}`, {
     method: 'DELETE',
     headers: {
@@ -127,10 +136,11 @@ export const delete_interview = (interview_id) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const interview = await response.json();
-    dispatch(remove(interview))
-    return interview;
+    await response.json();
+    dispatch(remove(interview_id))
+    return true;
   }
+  return false;
 }
 
 const initialState = {}
@@ -138,14 +148,18 @@ const initialState = {}
 const interviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
-      state.interviews = action.payload['interviews']
+      state = action.payload
       return state
     case ADD:
-      return state
+      const new_interview = action.payload.interview
+      state[new_interview[0]] = new_interview[1]
     case EDIT:
-      return state
+      const interview_id = Object.keys(action.payload)[0]
+      const interview_info = Object.values(action.payload)[0]
+      state[interview_id] = interview_info;
     case REMOVE:
-      return state
+      const key = action.payload
+      delete state[key]
     default:
       return state
   }

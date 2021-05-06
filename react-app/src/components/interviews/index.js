@@ -74,14 +74,14 @@ const MyInterviews = () => {
       interviews && Object.keys(interviews).map(key => {
         return (
           <div class="each-holder">
-          <div class="lines"></div>
-          <div className="each-interview" id="li">
+            <div class="lines"></div>
+            <div className="each-interview" id="li">
               <div>{interviews[key].company_id}</div>
               <button onClick={() => handleDelete(key)}>X</button>
               <div hidden="true">
                 <button onClick={() => openEditInterviewForm(key)}>Update Interview</button>
                 {(selectedInterview == key) &&
-                  <form id={key} className="edit_Interview_form" onSubmit={editInterview}>
+                  <form id={key} className="edit_interview_form" onSubmit={editInterview}>
                     <div onClick={() => closeInterviewForm()}>X</div>
                     {showEditInterviewForm && <CreateInterviewForm />}
                     <button type="submit">Update</button>
@@ -95,19 +95,19 @@ const MyInterviews = () => {
   }
 
   return (
-
-    <div className="interviews-block" id="interviews-block">
-      <h4>Interviews</h4>
+    <>
+      <div className="interviews-block" id="interviews-block">
+        <h4>Interviews</h4>
         <div id="list">{renderInterviews()}</div>
-        <div hidden="true">
-          <button onClick={openNewInterviewForm}>Record New Interview</button>
-          <form className="create_Interview_form" onSubmit={submitInterview}>
-            {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X</div>}
-            {showNewInterviewForm && <CreateInterviewForm />}
-            {showNewInterviewForm && <button type="submit">Create Interview!</button>}
-          </form>
-        </div>
-    </div>
+        <button onClick={openNewInterviewForm}>Record New Interview</button>
+      </div>
+
+        <form className="create_interview_form" onSubmit={submitInterview}>
+          {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X</div>}
+          {showNewInterviewForm && <CreateInterviewForm />}
+          {showNewInterviewForm && <button type="submit">Create Interview!</button>}
+        </form>
+    </>
   )
 }
 

@@ -8,7 +8,22 @@ body {
 	grid-template-rows: 50px 1fr;
 	grid-template-areas:
 		"navbar navbar navbar"
-		"labels body extra";
+		"labels body info";
+}
+
+
+.sticky {
+	grid-area: info;
+	background:#ffc;
+  height:12em;
+  width:12em;
+  padding:3em;
+	margin-top: 3em;
+	margin-left: 2em;
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+	transform:rotate(4deg);
+  position:relative;
+  top:5px;
 }
 
 .navbar-block {
@@ -45,10 +60,34 @@ body {
 .show-block-info {
 	grid-area: body;
 	visibility: visible;
-	width: 100%;
+	width: inherit;
 	transition: all 2s ease 0s;
 }
 
+/* .create_company_form, .create_application_form, .create_interview_form, .edit_interview_form, .edit_application_form { */
+	.sticky {
+	grid-area: info;
+	text-decoration:none;
+	color:#000;
+  /* background-color:#ffc; */
+  display:block;
+  height:16em;
+  width:16em;
+  padding:1em;
+	margin-left: 2em;
+	margin-top: 3em;
+	margin-right: 1em;
+	font-weight: 900;
+	font-size: 20px;
+	box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+}
+
+.sticky:hover {
+	box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  transform: scale(1.25);
+  position:relative;
+  z-index:5;
+}
 .container-labels{
 	grid-area: labels;
 	display: flex;
@@ -63,14 +102,14 @@ body {
 	font-size: 20px;
 	height: auto;
 	width: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	border-bottom-right-radius:1em;
-	border-top-right-radius: 5em;
+	padding: 10px;
+	border-bottom-right-radius:0.5em;
+	border-top-right-radius: 2em;
 	transition: all 1s ease 0s;
 	color: white;
 	margin-top: 0px;
 	margin-bottom: 0px;
+	box-shadow:10px 10px 7px rgba(0,0,0,.7);
 }
 .container-labels > *:hover {
 	width: 60px;
@@ -96,7 +135,7 @@ body {
 .show-block-info {
 	grid-area: body;
   background-color: #f5f5f5;
-  width: 600px;
+  width: inherit;
   margin: 0 auto;
   padding: 0;
 	height: fit-content;
@@ -113,11 +152,11 @@ h4 {
   padding: 0 !important;
   width: 100%;
   font-family: courier, monospace;
-  border: 1px solid #dedede;
+  border-top: 1px solid #dedede;
 }
 
 #li {
-	width: 100%;
+	width: 99%;
 }
 
 #list > * > * {

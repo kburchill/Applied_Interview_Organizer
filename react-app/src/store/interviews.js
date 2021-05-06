@@ -95,7 +95,7 @@ export const create_interview = (info) => async (dispatch) => {
   if (response.ok) {
     const interview = await response.json();
     dispatch(add(interview))
-    return interview;
+    return true;
   }
 }
 
@@ -152,10 +152,12 @@ const interviewReducer = (state = initialState, action) => {
     case ADD:
       const new_interview = action.payload.interview
       state[new_interview[0]] = new_interview[1]
+      return state
     case EDIT:
       const interview_id = Object.keys(action.payload)[0]
       const interview_info = Object.values(action.payload)[0]
       state[interview_id] = interview_info;
+      return state
     case REMOVE:
       const key = action.payload
       delete state[key]

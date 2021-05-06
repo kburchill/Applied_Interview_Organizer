@@ -71,16 +71,9 @@ def create_application():
                 'user_id': new_application.user_id,
                 'interview_id': new_application.interview_id
             })
-        application = {'application': [
-            new_application.id, application_info[0]]}
+        application = {'application': [new_application.id, application_info[0]]}
         return application
 
-    validation_errors = form.errors
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f"{field} : {error}")
-    return {"errors": errorMessages}, 401
 
 
 # Patch Routes

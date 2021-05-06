@@ -8,8 +8,6 @@ import './applications.css'
 const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications);
-  const user = useSelector(state => state.user);
-
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
@@ -18,13 +16,17 @@ const MyApplications = () => {
 
   const dispatch = useDispatch();
 
+  //State handlers
   const openNewApplicationForm = () => {
     if (showNewApplicationForm) return;
+    if (showEditApplicationForm) setShowEditApplicationForm(false);
+    closeApplicationForm();
     setShowNewApplicationForm(true);
   };
 
   const openEditApplicationForm = (application_id) => {
-    if (showEditApplicationForm) return;
+    if (showEditApplicationForm) closeApplicationForm();
+    closeApplicationForm();
     setSelectedApplication(application_id)
     setShowEditApplicationForm(true);
   };
@@ -35,10 +37,13 @@ const MyApplications = () => {
     setShowNewApplicationForm(false);
   };
 
+  //Handle delete
   const handleDelete = async (id) => {
     const loaded = await dispatch(delete_application(id))
     setLoaded(loaded)
   }
+
+  //Use Effects
   useEffect(() => {
     dispatch(get_applications())
   }, [dispatch])
@@ -49,6 +54,10 @@ const MyApplications = () => {
       setLoaded(false)
     }
   }, [loaded])
+
+  useEffect(() => {
+    renderEditForm(selectedApplication)
+  }, [selectedApplication])
 
   const submitApplication = async (e) => {
     e.preventDefault();
@@ -71,7 +80,6 @@ const MyApplications = () => {
 
   const editApplication = async (e) => {
     e.preventDefault();
-
     const info = form_info()
     const id = e.target.id
     const application_info = {}
@@ -81,46 +89,55 @@ const MyApplications = () => {
     closeApplicationForm();
   }
 
+
+  const renderEditForm = (key) => {
+    return (
+        <>
+              <form id={key} className="edit_application_form" onSubmit={editApplication}>
+                <div onClick={() => closeApplicationForm()}>X EDIT FORM</div>
+                {showEditApplicationForm && <CreateApplicationForm />}
+                <button type="submit">Update</button>
+              </form>
+        </>
+    )
+  }
+
   const renderApplications = () => {
     return (
       applications && Object.keys(applications).map(key => {
         return (
-          <div className="each-holder">
-            <div className="lines"></div>
-            <div className="each-application" id="li">
-              <div>{applications[key].company_id}</div>
-              <button onClick={() => handleDelete(key)}>X</button>
-              <div hidden="true">
-                <button onClick={() => openEditApplicationForm(key)}>Update Application</button>
-                {(selectedApplication == key) &&
-                  <form id={key} className="edit_application_form" onSubmit={editApplication}>
-                    <div onClick={() => closeApplicationForm()}>X</div>
-                    {showEditApplicationForm && <CreateApplicationForm />}
-                    <button type="submit">Update</button>
-                  </form>}
+          <>
+            <div id="list">
+            <div className="each-holder">
+              <div className="lines"></div>
+              <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
+                <div>{applications[key].company_id}</div>
+                <button onClick={() => handleDelete(key)}>X</button>
               </div>
             </div>
-          </div>
+            </div>
+          </>
         )
       })
     )
   }
 
   return (
-    <div className="applications-block" id="applications-block">
-      <div>
-        <h4>Applications</h4>
-        <div id="list">{renderApplications()}</div>
+    <>
+      <div className="applications-block" id="applications-block">
+          <h4>Applications</h4>
+          {renderApplications()}
+          <button onClick={openNewApplicationForm}>Record New Application</button>
       </div>
-      <div hidden="true">
-        <button onClick={openNewApplicationForm}>Record New Application</button>
+
+
         <form className="create_application_form" onSubmit={submitApplication}>
-          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X</div>}
+          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
           {showNewApplicationForm && <CreateApplicationForm />}
           {showNewApplicationForm && <button type="submit">I Applied!</button>}
         </form>
-      </div>
-    </div>
+          {selectedApplication && renderEditForm()}
+    </>
   )
 }
 

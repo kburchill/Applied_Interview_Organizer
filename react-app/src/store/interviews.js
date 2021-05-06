@@ -94,7 +94,6 @@ export const create_interview = (info) => async (dispatch) => {
 
   if (response.ok) {
     const interview = await response.json();
-    console.log(interview)
     dispatch(add(interview))
     return interview;
   }

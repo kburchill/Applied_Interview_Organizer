@@ -1,0 +1,107 @@
+@keyframes fadein {
+  from {
+    opacity: 0%;
+    scale: 0;
+  }
+  to {
+    opacity: 100%;
+    scale: 1;
+  }
+}
+
+.signup-form-div {
+  display: flex;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding-top: 5%;
+  padding-bottom: 20%;
+  justify-content: center;
+  animation-duration: 2s;
+  justify-content: center;
+  align-items: center;
+  animation-name: fadein;
+
+}
+
+.signup-form-div__row {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+#signup-form {
+  background: rgba(243, 239, 239, 0.5);
+  border-radius: 20.5px;
+  padding: 10px;
+  min-width: 50%;
+
+}
+
+.signup-form-div > * > div {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.signup-form-div > * > * > input:focus {
+  outline: none;
+}
+.signup-form-div * > * > input {
+  min-width: 50%;
+  max-height: 10px;
+  background: #FFFFFF;
+  border: 1px solid #621B19;
+  border-radius: 20.5px;
+  padding: 10px;
+  justify-self: left;
+  margin: auto;
+  width: 20px;
+  letter-spacing: 1.4px;
+  margin-bottom: 10px;
+
+}
+
+.signup-form-div * > * > label{
+  font-size: 20px;
+  padding: 5px;
+  width: 180px;
+  text-align: right;
+  padding-right: 20px;
+  letter-spacing: 1.6px;
+}
+.signup-button-submit {
+  background: #E1BF9A;
+  border-radius: 6px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  text-align: center;
+  padding: 8px 14px;
+  border: none;
+  transition-property: background ;
+  transition-duration: .2s;
+  width: 150px;
+}
+.signup-button-submit:hover {
+  background: white;
+}
+
+
+.buttonDiv {
+  margin: auto;
+}
+
+.error{
+  color: #621B19;
+  font-weight: 900;
+}
+
+.login-link {
+  color: #621B19;
+  margin: auto;
+  text-decoration: none;
+  text-align: center;
+}
+
+.login-link:hover {
+  color: white;
+}

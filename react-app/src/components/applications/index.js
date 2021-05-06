@@ -85,17 +85,20 @@ const MyApplications = () => {
     return (
       applications && Object.keys(applications).map(key => {
         return (
-          <div className="each-application">
-            <div>{applications[key].company_id}</div>
-            <button onClick={() => handleDelete(key)}>Delete application</button>
-            <div>
-              <button onClick={() => openEditApplicationForm(key)}>Update Application</button>
-              {(selectedApplication == key) &&
-                <form id={key} className="edit_application_form" onSubmit={editApplication}>
-                  <div onClick={() => closeApplicationForm()}>X</div>
-                  {showEditApplicationForm && <CreateApplicationForm />}
-                  <button type="submit">Update</button>
-                </form>}
+          <div className="each-holder">
+            <div className="lines"></div>
+            <div className="each-application" id="li">
+              <div>{applications[key].company_id}</div>
+              <button onClick={() => handleDelete(key)}>X</button>
+              <div hidden="true">
+                <button onClick={() => openEditApplicationForm(key)}>Update Application</button>
+                {(selectedApplication == key) &&
+                  <form id={key} className="edit_application_form" onSubmit={editApplication}>
+                    <div onClick={() => closeApplicationForm()}>X</div>
+                    {showEditApplicationForm && <CreateApplicationForm />}
+                    <button type="submit">Update</button>
+                  </form>}
+              </div>
             </div>
           </div>
         )
@@ -106,10 +109,10 @@ const MyApplications = () => {
   return (
     <div className="applications-block" id="applications-block">
       <div>
-        <div>applications will be here</div>
-        <div>{renderApplications()}</div>
+        <h4>Applications</h4>
+        <div id="list">{renderApplications()}</div>
       </div>
-      <div>
+      <div hidden="true">
         <button onClick={openNewApplicationForm}>Record New Application</button>
         <form className="create_application_form" onSubmit={submitApplication}>
           {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X</div>}

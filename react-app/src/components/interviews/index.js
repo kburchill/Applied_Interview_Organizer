@@ -70,21 +70,23 @@ const MyInterviews = () => {
   }
 
   const renderInterviews = () => {
-
     return (
       interviews && Object.keys(interviews).map(key => {
         return (
-          <div className="each-interview">
-            <div>{interviews[key].company_id}</div>
-            <button onClick={() => handleDelete(key)}>Delete Interview</button>
-            <div>
-              <button onClick={() => openEditInterviewForm(key)}>Update Interview</button>
-              {(selectedInterview == key) &&
-                <form id={key} className="edit_Interview_form" onSubmit={editInterview}>
-                  <div onClick={() => closeInterviewForm()}>X</div>
-                  {showEditInterviewForm && <CreateInterviewForm />}
-                  <button type="submit">Update</button>
-                </form>}
+          <div class="each-holder">
+          <div class="lines"></div>
+          <div className="each-interview" id="li">
+              <div>{interviews[key].company_id}</div>
+              <button onClick={() => handleDelete(key)}>X</button>
+              <div hidden="true">
+                <button onClick={() => openEditInterviewForm(key)}>Update Interview</button>
+                {(selectedInterview == key) &&
+                  <form id={key} className="edit_Interview_form" onSubmit={editInterview}>
+                    <div onClick={() => closeInterviewForm()}>X</div>
+                    {showEditInterviewForm && <CreateInterviewForm />}
+                    <button type="submit">Update</button>
+                  </form>}
+              </div>
             </div>
           </div>
         )
@@ -93,11 +95,11 @@ const MyInterviews = () => {
   }
 
   return (
+
     <div className="interviews-block" id="interviews-block">
-      <div>
-        <div>interviews will be here</div>
-        <div>{renderInterviews()}</div>
-        <div>
+      <h4>Interviews</h4>
+        <div id="list">{renderInterviews()}</div>
+        <div hidden="true">
           <button onClick={openNewInterviewForm}>Record New Interview</button>
           <form className="create_Interview_form" onSubmit={submitInterview}>
             {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X</div>}
@@ -105,7 +107,6 @@ const MyInterviews = () => {
             {showNewInterviewForm && <button type="submit">Create Interview!</button>}
           </form>
         </div>
-      </div>
     </div>
   )
 }

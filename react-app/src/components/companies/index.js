@@ -44,8 +44,11 @@ const MyCompanies = () => {
     return (
       companies && Object.values(companies).map(company => {
         return (
-          <div className="each-company">
-            <div>{company.name}</div>
+          <div class="each-holder">
+          <div class="lines"></div>
+          <div className="each-company" id="li">
+            {company.name}
+          </div>
           </div>
         )
       })
@@ -53,18 +56,18 @@ const MyCompanies = () => {
   }
 
   return (
-    <div className="companies-block" id="companies-block">
-      <div>Companies will be here</div>
-      <div>{renderCompanies()}</div>
-      <div>
-        <button onClick={openNewCompanyForm}>Add Company</button>
+    <div className="companies-block paper-div" id="companies-block">
+      <h4>Companies</h4>
 
-        <form className="create_company_form" onSubmit={submitCompany}>
-          {showNewCompanyForm && <div onClick={() => setShowNewCompanyForm(false)}>X</div>}
-          {showNewCompanyForm && <CreateCompanyForm />}
-          {showNewCompanyForm && <button type="submit">Submit</button>}
-        </form>
-      </div>
+        <div id="list">{renderCompanies()}</div>
+        <div hidden="true">
+          <button onClick={openNewCompanyForm}>Add Company</button>
+          <form className="create_company_form" onSubmit={submitCompany}>
+            {showNewCompanyForm && <div onClick={() => setShowNewCompanyForm(false)}>X</div>}
+            {showNewCompanyForm && <CreateCompanyForm />}
+            {showNewCompanyForm && <button type="submit">Submit</button>}
+          </form>
+        </div>
     </div>
   )
 }

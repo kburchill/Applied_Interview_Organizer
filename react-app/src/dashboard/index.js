@@ -7,6 +7,7 @@ import NavBar from "../components/navbar"
 import './dashboard.css'
 
 
+
 const MainBody = () => {
 
   const showCompanies = () => {
@@ -37,6 +38,7 @@ const MainBody = () => {
     <div className="main__container">
       <NavBar />
       <div className="container-labels">
+
         <div onClick={() => showCompanies()} className="company-label">Companies</div>
         <div onClick={() => showApplications()} className="application-label">Applications</div>
         <div onClick={() => showInterviews()} className="interview-label">Interviews</div>

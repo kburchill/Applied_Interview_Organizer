@@ -1,4 +1,6 @@
-
+body {
+	margin-left: 0px;
+}
 .main__container {
 	width: 100%;
 	display: grid;
@@ -47,22 +49,47 @@
 	transition: all 2s ease 0s;
 }
 
-/* .show-block-info > * > * > * {
-	grid-area: body;
-	border: 1px solid black;
-	visibility: visible;
-	width: 100%;
-	transition: all 1s ease 0s;
-} */
 .container-labels{
 	grid-area: labels;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
+	flex-direction: row;
+	text-orientation: upright;
+	writing-mode: vertical-lr;
+	height: 100%;
+	margin-top: 20%;
 }
 
+.container-labels > * {
+	font-size: 20px;
+	height: auto;
+	width: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom-right-radius:1em;
+	border-top-right-radius: 5em;
+	transition: all 1s ease 0s;
+	color: white;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
 .container-labels > *:hover {
-	background-color: red;
+	width: 60px;
+	padding-left: 15px;
+	transition: all 1s ease 0s;
+	justify-content: center;
+}
+
+.company-label {
+	background-color: blue;
+}
+
+
+.application-label {
+	background-color: rgb(46, 194, 83);
+}
+
+.interview-label {
+	background-color: rgb(0, 217, 255);
 }
 
 

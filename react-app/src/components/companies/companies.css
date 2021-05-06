@@ -4,14 +4,6 @@
 }
 
 
-/* .each-company {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  max-height: 100px;
-  min-height: 20px;
-  padding: 5px;
-} */
 
 .each-company:hover {
   height: 100px;

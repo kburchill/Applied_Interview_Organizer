@@ -1,3 +1,13 @@
+@keyframes fadein {
+  from {
+    opacity: 0%;
+    scale: 0;
+  }
+  to {
+    opacity: 100%;
+    scale: 1;
+  }
+}
 
 .form-body {
     grid-area: info;
@@ -19,7 +29,26 @@
     top:5px;
     box-shadow: 5px 5px 7px rgba(33,33,33,.7);
     transition: transform .15s linear;
+    animation-duration: 2s;
+    animation-name: fadein;
+}
 
+.form-body > * {
+  background: transparent;
+  border: none;
+  display: flex;
+}
+
+.form-body > .view-false {
+  visibility: hidden;
+}
+
+.form-body > input {
+  border-bottom: 1px dotted #ccc;
+}
+
+.form-body > label {
+  font-size: 15px;
 }
 
 .form-body:hover {

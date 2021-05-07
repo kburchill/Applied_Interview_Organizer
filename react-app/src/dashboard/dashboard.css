@@ -1,3 +1,15 @@
+@keyframes fadein {
+  from {
+    opacity: 0%;
+    scale: 0;
+  }
+  to {
+    opacity: 100%;
+    scale: 1;
+  }
+}
+
+
 body {
 	margin-left: 0px;
 }
@@ -15,60 +27,12 @@ body {
 .navbar-block {
   grid-area: navbar;
 }
-/* .companies-block {
-  grid-area: body;
-	visibility: hidden;
-	width: 25%;
-}
 
-.companies-block > * {
-	visibility: hidden;
-	width: 25%;
-} */
-
-/* .companies-form {
-	visibility: hidden;
-} */
-/* .applications-form {
-	visibility: hidden;
-}
-.interviews-form {
-	visibility: hidden;
-}
-.show-form-info {
-	visibility: visible;
-} */
-/* .applications-block {
-  grid-area: body;
-	visibility: hidden;
-	width: 25%;
-}
-.applications-block > *{
-	visibility: hidden;
-	width: 25%;
-} */
-/* .interviews-block {
-  grid-area: body;
-	visibility: hidden;
-	width: 25%;
-}
-.interviews-block > * {
-	visibility: hidden;
-	width: 25%;
-} */
-
-/* .show-block-info {
-	grid-area: body;
-	visibility: visible;
-	width: inherit;
-	transition: all 2s ease 0s;
-} */
 
 #interviews-form, #applications-form, #companies-form {
 grid-area: info;
+
 }
-
-
 
 .container-labels{
 	grid-area: labels;
@@ -120,6 +84,8 @@ grid-area: info;
   margin: 0 auto;
   padding: 0;
 	height: fit-content;
+	animation-duration: 1s;
+	animation-name: fadein;
 }
 h4 {
   color: #cd0000;

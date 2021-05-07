@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_applications, delete_application, create_application, update_application, selected_application } from "../../store/applications"
-import { create_interview } from "../../store/interviews";
+import { create_interview, get_interviews } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 import './applications.css'
 
 const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications.applications);
+  const interviews = useSelector(state => state.interviews)
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
@@ -25,8 +26,6 @@ const MyApplications = () => {
   };
 
   const openEditApplicationForm = async (application_id) => {
-
-    if (showEditApplicationForm) closeApplicationForm();
     closeApplicationForm();
     setSelectedApplication(application_id)
     await dispatch(selected_application(application_id))
@@ -48,9 +47,15 @@ const MyApplications = () => {
 
   //Use Effects
   useEffect(() => {
+    if (applications) return
     dispatch(get_applications())
   }, [dispatch])
 
+  useEffect(() => {
+    if (interviews) return
+    dispatch(get_interviews())
+  }, [dispatch])
+  
   useEffect(() => {
     if (loaded) {
       renderApplications()
@@ -135,12 +140,12 @@ const MyApplications = () => {
         <button onClick={openNewApplicationForm}>Record New Application</button>
       </div>
       <div id="applications-form">
-      <form className="create_application_form" onSubmit={submitApplication}>
-        {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
-        {showNewApplicationForm && <CreateApplicationForm />}
-        {showNewApplicationForm && <button type="submit">I Applied!</button>}
-        {selectedApplication && renderEditForm()}
-      </form>
+        <form className="create_application_form" onSubmit={submitApplication}>
+          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
+          {showNewApplicationForm && <CreateApplicationForm />}
+          {showNewApplicationForm && <button type="submit">I Applied!</button>}
+          {selectedApplication && renderEditForm()}
+        </form>
       </div>
     </>
   )

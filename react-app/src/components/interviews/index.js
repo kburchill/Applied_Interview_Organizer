@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_interviews, create_interview, update_interview, delete_interview } from "../../store/interviews"
+import { get_interviews, create_interview, update_interview, delete_interview, selected_interview } from "../../store/interviews"
+import { get_applications } from "../../store/applications"
 import CreateInterviewForm, { form_info } from "../forms/interview-form"
 import './interviews.css'
 
 
 const MyInterviews = () => {
-  const interviews = useSelector(state => state.interviews);
-  const user = useSelector(state => state.user);
+  const applications = useSelector(state => state.applications.applications);
+  const interviews = useSelector(state => state.interviews.interviews);
 
 
   const [showNewInterviewForm, setShowNewInterviewForm] = useState(false);
@@ -19,12 +20,15 @@ const MyInterviews = () => {
 
   const openNewInterviewForm = () => {
     if (showNewInterviewForm) return;
+    if (showEditInterviewForm) setShowEditInterviewForm(false);
+    closeInterviewForm();
     setShowNewInterviewForm(true);
   };
 
-  const openEditInterviewForm = (interview_id) => {
-    if (showEditInterviewForm) return;
+  const openEditInterviewForm = async (interview_id) => {
+    closeInterviewForm();
     setSelectedInterview(interview_id)
+    await dispatch(selected_interview(interview_id))
     setShowEditInterviewForm(true);
   };
 
@@ -39,7 +43,13 @@ const MyInterviews = () => {
     setLoaded(loaded)
   }
   useEffect(() => {
+    if (interviews) return
     dispatch(get_interviews())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (applications) return
+    dispatch(get_applications())
   }, [dispatch])
 
   useEffect(() => {
@@ -48,6 +58,10 @@ const MyInterviews = () => {
       setLoaded(false)
     }
   }, [loaded])
+
+  useEffect(() => {
+    renderEditForm(selectedInterview)
+  }, [selectedInterview])
 
   const submitInterview = async (e) => {
     e.preventDefault();
@@ -69,26 +83,32 @@ const MyInterviews = () => {
     closeInterviewForm();
   }
 
+  const renderEditForm = (key) => {
+    return (
+      <>
+        <form id={key} className="edit_interview-form" onSubmit={editInterview}>
+          <div onClick={() => closeInterviewForm()}>X EDIT I FORM</div>
+          {showEditInterviewForm && <CreateInterviewForm />}
+          <button type="submit">Update</button>
+        </form>
+      </>
+    )
+  }
   const renderInterviews = () => {
     return (
       interviews && Object.keys(interviews).map(key => {
         return (
-          <div class="each-holder">
-            <div class="lines"></div>
-            <div className="each-interview" id="li">
-              <div>{interviews[key].company_id}</div>
-              <button onClick={() => handleDelete(key)}>X</button>
-              <div hidden="true">
-                <button onClick={() => openEditInterviewForm(key)}>Update Interview</button>
-                {(selectedInterview == key) &&
-                  <form id={key} className="edit_interview_form" onSubmit={editInterview}>
-                    <div onClick={() => closeInterviewForm()}>X</div>
-                    {showEditInterviewForm && <CreateInterviewForm />}
-                    <button type="submit">Update</button>
-                  </form>}
+          <>
+            <div id="list">
+              <div className="each-holder">
+                <div className="lines"></div>
+                <div className="each-interview" id="li" onClick={() => openEditInterviewForm(key)}>
+                  <div>{interviews[key].company_id} company id</div>
+                  <button onClick={() => handleDelete(key)}>X</button>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         )
       })
     )
@@ -98,14 +118,15 @@ const MyInterviews = () => {
     <>
       <div className="interviews-block" id="interviews-block">
         <h4>Interviews</h4>
-        <div id="list">{renderInterviews()}</div>
+        {renderInterviews()}
         <button onClick={openNewInterviewForm}>Record New Interview</button>
       </div>
       <div id="interviews-form">
         <form className="create_interview_form" onSubmit={submitInterview}>
-          {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X</div>}
+          {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X<div>CREATE INT FORM</div></div>}
           {showNewInterviewForm && <CreateInterviewForm />}
           {showNewInterviewForm && <button type="submit">Create Interview!</button>}
+          {selectedInterview && renderEditForm()}
         </form>
       </div>
     </>

@@ -2,7 +2,7 @@ const LOAD = "interviews/LOAD";
 const ADD = "interviews/ADD";
 const REMOVE = "interviews/REMOVE";
 const EDIT = 'interviews/EDIT';
-
+const SELECT = 'interviews/SELECT'
 
 const load = interviews => ({
   type: LOAD,
@@ -22,6 +22,11 @@ const edit = interview => ({
 
 const remove = interview => ({
   type: REMOVE,
+  payload: interview
+})
+
+const selected = interview => ({
+  type: SELECT,
   payload: interview
 })
 
@@ -142,25 +147,35 @@ export const delete_interview = (interview_id) => async (dispatch) => {
   return false;
 }
 
+export const selected_interview = (interview_id) => async (dispatch) => {
+  dispatch(selected(interview_id))
+}
+
 const initialState = {}
 
 const interviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
-      state = action.payload
+      state['interviews'] = action.payload
       return state
     case ADD:
       const new_interview = action.payload.interview
-      state[new_interview[0]] = new_interview[1]
+      state['interviews'][new_interview[0]] = new_interview[1]
       return state
     case EDIT:
       const interview_id = Object.keys(action.payload)[0]
       const interview_info = Object.values(action.payload)[0]
-      state[interview_id] = interview_info;
+      state['interviews'][interview_id] = interview_info;
       return state
     case REMOVE:
       const key = action.payload
-      delete state[key]
+      delete state['interviews'][key]
+      return state
+    case SELECT:
+      const selected_int_id = action.payload;
+      const selected_int_info = state.interviews[selected_int_id]
+      state['selected'] = [selected_int_id, selected_int_info]
+      return state
     default:
       return state
   }

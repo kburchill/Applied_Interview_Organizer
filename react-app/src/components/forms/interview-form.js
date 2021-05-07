@@ -10,13 +10,17 @@ export const form_info = () => {
 const CreateInterviewForm = () => {
   //Stores
   const user = useSelector(state => state.session.user)
+  const interview = useSelector(state => state.interviews.selected)
+
+  const int_sent_date = new Date(interview[1].date) || new Date()
+  const int_date_value = int_sent_date.toISOString().substring(0, 10);
 
   //States
   const [company_id, setCompany_id] = useState(1);
-  const [completed, setCompleted] = useState(false);
-  const [date, setDate] = useState();
-  const [contact_name, setContact_name] = useState("");
-  const [interview_type, setInterview_type] = useState("");
+  const [completed, setCompleted] = useState(interview[1].completed);
+  const [date, setDate] = useState(int_date_value);
+  const [contact_name, setContact_name] = useState(interview[1].contact_name);
+  const [interview_type, setInterview_type] = useState(interview[1].interview_type);
 
   const userId = user.id;
 
@@ -69,7 +73,7 @@ const CreateInterviewForm = () => {
       </div>
       <div>
         <label>Interview completed</label>
-        <select onChange={(e) => setCompleted(e.target.value)}>
+        <select value={completed} onChange={(e) => setCompleted(e.target.value)}>
           <option value="true">Yes</option>
           <option selected value="false">No</option>
         </select>

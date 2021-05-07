@@ -114,7 +114,6 @@ export const delete_application = (application_id) => async (dispatch) => {
 //Set selected application
 export const selected_application = (application_id) => async (dispatch) => {
   dispatch(selected(application_id))
-  console.log("THIS HAPPENED", application_id)
 }
 
 const initialState = {}
@@ -139,7 +138,6 @@ const applicationReducer = (state = initialState, action) => {
       return state
     case SELECT:
       const selected_app_id = action.payload;
-      console.log(selected_app_id)
       const selected_app_info = state.applications[selected_app_id]
       state['selected'] = [selected_app_id, selected_app_info]
       return state

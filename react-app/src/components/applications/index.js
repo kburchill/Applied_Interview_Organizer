@@ -9,7 +9,7 @@ const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications.applications);
   const interviews = useSelector(state => state.interviews)
-
+  
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState()
@@ -55,7 +55,7 @@ const MyApplications = () => {
     if (interviews) return
     dispatch(get_interviews())
   }, [dispatch])
-  
+
   useEffect(() => {
     if (loaded) {
       renderApplications()

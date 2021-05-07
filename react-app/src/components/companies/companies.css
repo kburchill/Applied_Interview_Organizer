@@ -8,3 +8,8 @@
   height: 100px;
   transition: all 2s ease 1s;
 }
+
+.each-company {
+  display: flex;
+  justify-content: space-around;
+}

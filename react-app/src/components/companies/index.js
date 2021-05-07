@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_companies, create_company } from "../../store/companies"
-import { get_applications } from "../../store/applications"
+import { get_applications, selected_application } from "../../store/applications"
 import CreateCompanyForm, { form_info } from "../forms/company-form"
 import './companies.css'
 
@@ -12,7 +12,8 @@ const MyCompanies = () => {
   const applications = useSelector(state => state.applications.applications);
 
   const [showNewCompanyForm, setShowNewCompanyForm] = useState(false);
-  const [applied, setApplied] = useState(false);
+  const [showCompanyInfo, setShowCompanyInfo] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState()
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
@@ -22,6 +23,17 @@ const MyCompanies = () => {
     setShowNewCompanyForm(true);
   };
 
+  const openCompanyInfo = (company_id) => {
+    closeCompanyInfo();
+    setSelectedCompany(company_id)
+    setShowCompanyInfo(true);
+  }
+
+  const closeCompanyInfo = () => {
+    setShowNewCompanyForm(false);
+    setShowCompanyInfo(false);
+    return
+  }
   useEffect(() => {
     dispatch(get_companies())
   }, [dispatch])
@@ -54,6 +66,22 @@ const MyCompanies = () => {
     setShowNewCompanyForm(false);
   }
 
+  const renderCompanyInfo = (key) => {
+    const company = companies[key];
+    console.log("WE ARE HAPPENING", companies[key])
+    return (
+          <>
+            <div className="company-info">
+            <div>{company.name}</div>
+            <div>City: {company.city}</div>
+            <div>State: {company.state}</div>
+            <div>Address 1: {company.address_1}</div>
+            <div>Address 2: {company.address_2}</div>
+            <div>Job Listings <a href={company.job_openings}>Job Openings</a></div>
+            </div>
+          </>
+        )
+  }
 
   const renderCompanies = () => {
     {appliedCompanies()}
@@ -63,8 +91,8 @@ const MyCompanies = () => {
         return (
           <div class="each-holder">
             <div class="lines"></div>
-            <div className="each-company" id="li">
-            <div>{company.name}</div><div className={`applied-${companies_with_applications.includes(company.id)}`}>{`applied-${companies_with_applications.includes(Number(key))}`}</div> <div>{companies_with_applications}</div>
+            <div className="each-company" id="li" onClick={() => openCompanyInfo(key)}>
+            <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.name}</div>
             </div>
           </div>
         )
@@ -81,11 +109,10 @@ const MyCompanies = () => {
       </div>
       <div id="companies-form">
         <form className="create_company_form" onSubmit={submitCompany}>
-          {showNewCompanyForm && <div onClick={() => setShowNewCompanyForm(false)}>X</div>}
-          <div className="sticky">
-            {showNewCompanyForm && <CreateCompanyForm />}
-            {showNewCompanyForm && <button type="submit">Submit</button>}
-          </div>
+          {showNewCompanyForm && <div onClick={closeCompanyInfo()}>X<div>CREATE FORM</div></div>}
+          {showNewCompanyForm && <CreateCompanyForm />}
+          {showNewCompanyForm && <button type="submit">Submit</button>}
+          {selectedCompany && renderCompanyInfo(selectedCompany)}
         </form>
       </div>
     </>

@@ -9,7 +9,7 @@ const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications.applications);
   const interviews = useSelector(state => state.interviews)
-  
+
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState()
@@ -104,7 +104,7 @@ const MyApplications = () => {
     return (
       <>
         <form id={key} className="edit_application_form" onSubmit={editApplication}>
-          <div onClick={() => closeApplicationForm()}>X EDIT FORM</div>
+          <div id="close-button" onClick={() => closeApplicationForm()}>X</div>
           {showEditApplicationForm && <CreateApplicationForm />}
           <button type="submit">Update</button>
         </form>
@@ -144,7 +144,7 @@ const MyApplications = () => {
           {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
           {showNewApplicationForm && <CreateApplicationForm />}
           {showNewApplicationForm && <button type="submit">I Applied!</button>}
-          {selectedApplication && renderEditForm()}
+          {selectedApplication && renderEditForm(selectedApplication)}
         </form>
       </div>
     </>

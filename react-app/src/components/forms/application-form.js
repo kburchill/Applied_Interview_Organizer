@@ -12,7 +12,7 @@ const CreateApplicationForm = () => {
   //Variables
   const user = useSelector(state => state.session.user)
   const application = useSelector(state => state.applications.selected)
-  
+
   const app_sent_date = new Date(application[1].sent_out) || new Date()
   const sent_date_value = app_sent_date.toISOString().substring(0, 10);
   let response_date_value;
@@ -62,6 +62,7 @@ const CreateApplicationForm = () => {
 
   return (
     <div className="form-body">
+      <div id="application-x-form">X</div>
       <label>Where did you apply?</label>
       <select onChange={(e) => setCompany_id(e.target.value)}>
         <option selected value="1">Apple</option>

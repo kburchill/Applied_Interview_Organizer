@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_applications, delete_application, create_application, update_application } from "../../store/applications"
+import { get_applications, delete_application, create_application, update_application, selected_application } from "../../store/applications"
 import { create_interview } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 import './applications.css'
 
 const MyApplications = () => {
   //State
-  const applications = useSelector(state => state.applications);
+  const applications = useSelector(state => state.applications.applications);
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
   const [showEditApplicationForm, setShowEditApplicationForm] = useState(false);
@@ -24,10 +24,12 @@ const MyApplications = () => {
     setShowNewApplicationForm(true);
   };
 
-  const openEditApplicationForm = (application_id) => {
+  const openEditApplicationForm = async (application_id) => {
+
     if (showEditApplicationForm) closeApplicationForm();
     closeApplicationForm();
     setSelectedApplication(application_id)
+    await dispatch(selected_application(application_id))
     setShowEditApplicationForm(true);
   };
 
@@ -59,6 +61,8 @@ const MyApplications = () => {
   useEffect(() => {
     renderEditForm(selectedApplication)
   }, [selectedApplication])
+
+
 
   const submitApplication = async (e) => {
     e.preventDefault();

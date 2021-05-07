@@ -2,6 +2,7 @@ const LOAD = "applications/LOAD";
 const ADD = "applications/ADD";
 const REMOVE = "applications/REMOVE";
 const EDIT = 'applications/EDIT';
+const SELECT = 'applciations/SELECT';
 
 const load = applications => ({
   type: LOAD,
@@ -23,6 +24,10 @@ const remove = application => ({
   payload: application
 })
 
+const selected = application => ({
+  type: SELECT,
+  payload: application
+})
 
 // Get all applications
 export const get_applications = () => async (dispatch) => {
@@ -106,25 +111,37 @@ export const delete_application = (application_id) => async (dispatch) => {
   return false;
 }
 
+//Set selected application
+export const selected_application = (application_id) => async (dispatch) => {
+  dispatch(selected(application_id))
+  console.log("THIS HAPPENED", application_id)
+}
+
 const initialState = {}
 
 const applicationReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD:
-      state = action.payload
+      state['applications'] = action.payload
       return state
     case ADD:
       const new_app = action.payload.application
-      state[new_app[0]] = new_app[1]
+      state['applications'][new_app[0]] = new_app[1]
       return state
     case EDIT:
       const app_id = Object.keys(action.payload)[0]
       const app_info = Object.values(action.payload)[0]
-      state[app_id] = app_info;
+      state['applications'][app_id] = app_info;
       return state
     case REMOVE:
       const key = action.payload
-      delete state[key]
+      delete state['applications'][key]
+      return state
+    case SELECT:
+      const selected_app_id = action.payload;
+      console.log(selected_app_id)
+      const selected_app_info = state.applications[selected_app_id]
+      state['selected'] = [selected_app_id, selected_app_info]
       return state
     default:
       return state

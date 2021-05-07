@@ -11,16 +11,35 @@ export const form_info = () => {
 const CreateApplicationForm = () => {
   //Stores
   const user = useSelector(state => state.session.user)
+  const application = useSelector(state => state.applications.selected)
+  //application[key] = data I want
 
+  //
+  const app_sent_date = new Date(application[1].sent_out) || new Date()
+  const sent_date_value = app_sent_date.toISOString().substring(0, 10);
+  let response_date_value;
+  if (application[1].response_date) {
+    const app_response_date = new Date(application[1].response_date)
+    response_date_value = app_response_date.toISOString().substring(0, 10);
+  } else {
+    response_date_value = null
+  }
+  let interview_date_value;
+  if (application[1].interview_date) {
+    const app_interview_date = new Date(application[1].interview_date)
+    interview_date_value = app_interview_date.toISOString().substring(0, 10);
+  } else {
+    interview_date_value = null
+  }
   //States
   const [company_id, setCompany_id] = useState(1);
-  const [sent_out, setSent_date] = useState(new Date())
-  const [response, setResponse] = useState(false);
-  const [response_date, setResponse_date] = useState();
-  const [interview, setInterview] = useState(false);
-  const [interview_date, setInterview_date] = useState();
-  const [interview_contact, setInterview_contact] = useState("");
-  const [interview_type, setInterview_type] = useState("");
+  const [sent_out, setSent_date] = useState(sent_date_value)
+  const [response, setResponse] = useState(application[1].response);
+  const [response_date, setResponse_date] = useState(response_date_value);
+  const [interview, setInterview] = useState(application[1].interview);
+  const [interview_date, setInterview_date] = useState(interview_date_value);
+  const [interview_contact, setInterview_contact] = useState(application[1].contact_name);
+  const [interview_type, setInterview_type] = useState(application[1].interview_type);
   const [showResponse, setShowResponse] = useState(false);
   const [showInterview, setShowInterview] = useState(false);
 
@@ -43,8 +62,6 @@ const CreateApplicationForm = () => {
     setShowInterview(interview);
   }, [response, interview])
 
-  //We can add update in here and use this form
-
   return (
     <div className="form-body">
       <label>Where did you apply?</label>
@@ -58,27 +75,27 @@ const CreateApplicationForm = () => {
         name="date"
         type="date"
         className="form-input"
-        value={sent_out}
+        value={response_date}
         onChange={(e) => setSent_date(e.target.value)}
       />
       <label>Have you heard back?</label>
-      <select onChange={(e) => setResponse(e.target.value)}>
+      <select value={`${response}`} onChange={(e) => setResponse(e.target.value)}>
+        <option value="false">No</option>
         <option value="true">Yes</option>
-        <option selected value="false">No</option>
       </select>
-        <label className={`view-${showResponse}`}>Awesome! When did you hear back?</label>
-        <input
-          hidden={!response}
-          name="date"
-          type="date"
-          className={`form-input view-${showResponse}`}
-          value={response_date}
-          onChange={(e) => setResponse_date(e.target.value)}
-        />
+      <label className={`view-${showResponse}`}>Awesome! When did you hear back?</label>
+      <input
+        hidden={!response}
+        name="date"
+        type="date"
+        className={`form-input view-${showResponse}`}
+        value={response_date}
+        onChange={(e) => setResponse_date(e.target.value)}
+      />
       <label className={`view-${showResponse}`}>Do you have an interview date?</label>
-      <select className={`view-${showResponse}`} onChange={(e) => setInterview(e.target.value)}>
+      <select value={`${interview}`} className={`view-${showResponse}`} onChange={(e) => setInterview(e.target.value)}>
         <option value="true">Yes</option>
-        <option selected value="false">No</option>
+        <option value="false">No</option>
       </select>
       <label className={`view-${showInterview}`}>Woohoo! When is your interview?</label>
       <input
@@ -105,7 +122,6 @@ const CreateApplicationForm = () => {
         className={`form-input view-${showInterview}`}
       />
     </div>
-
   );
 };
 

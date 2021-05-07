@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import './form.css'
 
 let info = {}
 
@@ -34,49 +34,61 @@ const CreateCompanyForm = () => {
   //We can add update in here and use this form
 
   return (
-    <div>
-      <label>Company Name</label>
-      <textarea
-        name="company-name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="form-input"
-      />
-      <label>City</label>
-      <textarea
-        name="city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        className="form-input"
-      />
-      <label>State</label>
-      <textarea
-        name="state"
-        value={state}
-        onChange={(e) => setState(e.target.value)}
-        className="form-input"
-      />
-      <label>Address-1</label>
-      <textarea
-        name="address-1"
-        value={address_1}
-        onChange={(e) => setAddress1(e.target.value)}
-        className="form-input"
-      />
-      <label>Address-2</label>
-      <textarea
-        name="address-2"
-        value={address_2}
-        onChange={(e) => setAddress2(e.target.value)}
-        className="form-input"
-      />
-      <label>Job Listings Page</label>
-      <textarea
-        name="job-listings"
-        value={job_openings}
-        onChange={(e) => setJob_openings(e.target.value)}
-        className="form-input"
-      />
+    <div className="form-body">
+      <div>
+        <label>Company Name</label>
+        <input
+          name="company-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="form-input"
+        />
+      </div>
+      <div>
+        <label>City</label>
+        <input
+          name="city"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          className="form-input"
+        />
+      </div>
+      <div>
+        <label>State</label>
+        <input
+          name="state"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
+          className="form-input"
+        />
+      </div>
+      <div>
+        <label>Address-1</label>
+        <input
+          name="address-1"
+          value={address_1}
+          onChange={(e) => setAddress1(e.target.value)}
+          className="form-input"
+        />
+      </div>
+      <div>
+        <label>Address-2</label>
+        <input
+          name="address-2"
+          value={address_2}
+          onChange={(e) => setAddress2(e.target.value)}
+          className="form-input"
+        />
+      </div>
+      <div>
+        <label>Job Listings Page</label>
+        <input
+          name="job-listings"
+          value={job_openings}
+          onChange={(e) => setJob_openings(e.target.value)}
+          className="form-input"
+        />
+      </div>
     </div>
 
   );

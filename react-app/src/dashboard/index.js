@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import MyCompanies from "../components/companies"
 import MyInterviews from "../components/interviews"
@@ -6,46 +6,43 @@ import MyApplications from "../components/applications"
 import NavBar from "../components/navbar"
 import './dashboard.css'
 
+const showCompanies = <MyCompanies />
+const showInterviews = <MyInterviews />
+const showApplications = <MyApplications />
 
 
 const MainBody = () => {
+  const [showCompanies, setShowCompanies] = useState(false);
+  const [showApplications, setShowApplications] = useState(false);
+  const [showInterviews, setShowInterviews] = useState(false);
 
-  const showCompanies = () => {
-    const company_block = document.getElementById("companies-block");
-    const application_block = document.getElementById("applications-block");
-    const interviews_block = document.getElementById("interviews-block");
-    company_block.className = "show-block-info"
-    application_block.className = "applications-block"
-    interviews_block.className = "interviews-block"
+  const setCompanies = () => {
+    setShowCompanies(true)
+    setShowApplications(false)
+    setShowInterviews(false)
   }
-  const showApplications = () => {
-    const company_block = document.getElementById("companies-block");
-    const application_block = document.getElementById("applications-block");
-    const interviews_block = document.getElementById("interviews-block");
-    company_block.className = "companies-block"
-    application_block.className = "show-block-info"
-    interviews_block.className = "interviews-block"
+  const setApplications = () => {
+    setShowCompanies(false)
+    setShowApplications(true)
+    setShowInterviews(false)
   }
-  const showInterviews = () => {
-    const company_block = document.getElementById("companies-block");
-    const application_block = document.getElementById("applications-block");
-    const interviews_block = document.getElementById("interviews-block");
-    company_block.className = "companies-block"
-    application_block.className = "applications-block"
-    interviews_block.className = "show-block-info"
+  const setInterviews = () => {
+    setShowCompanies(false)
+    setShowApplications(false)
+    setShowInterviews(true)
   }
   return (
     <div className="main__container">
       <NavBar />
       <div className="container-labels">
 
-        <div onClick={() => showCompanies()} className="company-label">Companies</div>
-        <div onClick={() => showApplications()} className="application-label">Applications</div>
-        <div onClick={() => showInterviews()} className="interview-label">Interviews</div>
+        <div onClick={() => setCompanies()} className="company-label">Companies</div>
+        <div onClick={() => setApplications()} className="application-label">Applications</div>
+        <div onClick={() => setInterviews()} className="interview-label">Interviews</div>
       </div>
-      <MyCompanies />
-      <MyApplications />
-      <MyInterviews />
+      {showCompanies && <MyCompanies />}
+      {showApplications && <MyApplications />}
+      {showInterviews && <MyInterviews />}
     </div>
   )
 }

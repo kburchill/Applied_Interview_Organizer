@@ -12,33 +12,33 @@ body {
 }
 
 
-.sticky {
-	grid-area: info;
-	background:#ffc;
-  height:12em;
-  width:12em;
-  padding:3em;
-	margin-top: 3em;
-	margin-left: 2em;
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-	transform:rotate(4deg);
-  position:relative;
-  top:5px;
-}
-
 .navbar-block {
   grid-area: navbar;
 }
-.companies-block {
+/* .companies-block {
   grid-area: body;
 	visibility: hidden;
 	width: 25%;
 }
+
 .companies-block > * {
 	visibility: hidden;
 	width: 25%;
+} */
+
+/* .companies-form {
+	visibility: hidden;
+} */
+/* .applications-form {
+	visibility: hidden;
 }
-.applications-block {
+.interviews-form {
+	visibility: hidden;
+}
+.show-form-info {
+	visibility: visible;
+} */
+/* .applications-block {
   grid-area: body;
 	visibility: hidden;
 	width: 25%;
@@ -46,8 +46,8 @@ body {
 .applications-block > *{
 	visibility: hidden;
 	width: 25%;
-}
-.interviews-block {
+} */
+/* .interviews-block {
   grid-area: body;
 	visibility: hidden;
 	width: 25%;
@@ -55,39 +55,21 @@ body {
 .interviews-block > * {
 	visibility: hidden;
 	width: 25%;
-}
+} */
 
-.show-block-info {
+/* .show-block-info {
 	grid-area: body;
 	visibility: visible;
 	width: inherit;
 	transition: all 2s ease 0s;
+} */
+
+#interviews-form, #applications-form, #companies-form {
+grid-area: info;
 }
 
-/* .create_company_form, .create_application_form, .create_interview_form, .edit_interview_form, .edit_application_form { */
-	.sticky {
-	grid-area: info;
-	text-decoration:none;
-	color:#000;
-  /* background-color:#ffc; */
-  display:block;
-  height:16em;
-  width:16em;
-  padding:1em;
-	margin-left: 2em;
-	margin-top: 3em;
-	margin-right: 1em;
-	font-weight: 900;
-	font-size: 20px;
-	box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-}
 
-.sticky:hover {
-	box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  transform: scale(1.25);
-  position:relative;
-  z-index:5;
-}
+
 .container-labels{
 	grid-area: labels;
 	display: flex;
@@ -131,8 +113,7 @@ body {
 	background-color: rgb(0, 217, 255);
 }
 
-
-.show-block-info {
+.interviews-block, .companies-block, .applications-block {
 	grid-area: body;
   background-color: #f5f5f5;
   width: inherit;

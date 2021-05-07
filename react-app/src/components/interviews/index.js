@@ -101,15 +101,17 @@ const MyInterviews = () => {
         <div id="list">{renderInterviews()}</div>
         <button onClick={openNewInterviewForm}>Record New Interview</button>
       </div>
-
+      <div id="interviews-form">
         <form className="create_interview_form" onSubmit={submitInterview}>
           {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X</div>}
           {showNewInterviewForm && <CreateInterviewForm />}
           {showNewInterviewForm && <button type="submit">Create Interview!</button>}
         </form>
+      </div>
     </>
   )
 }
+
 
 
 export default MyInterviews

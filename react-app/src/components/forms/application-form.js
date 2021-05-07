@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import './form.css'
 
 let info = {}
 
@@ -40,7 +40,7 @@ const CreateApplicationForm = () => {
   //We can add update in here and use this form
 
   return (
-      <div>
+      <div className="form-body">
         <label>Where did you apply?</label>
         <select onChange={(e) => setCompany_id(e.target.value)}>
           <option selected value="1">Apple</option>

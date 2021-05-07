@@ -5,6 +5,7 @@ import CreateCompanyForm, { form_info } from "../forms/company-form"
 import './companies.css'
 
 
+
 const MyCompanies = () => {
   const companies = useSelector(state => state.companies);
   const user = useSelector(state => state.user);
@@ -57,13 +58,12 @@ const MyCompanies = () => {
 
   return (
     <>
-      <div className="companies-block paper-div" id="companies-block">
+      <div className="companies-block" id="companies-block">
         <h4>Companies</h4>
-
         <div id="list">{renderCompanies()}</div>
         <button onClick={openNewCompanyForm}>Add Company</button>
       </div>
-
+      <div id="companies-form">
         <form className="create_company_form" onSubmit={submitCompany}>
           {showNewCompanyForm && <div onClick={() => setShowNewCompanyForm(false)}>X</div>}
           <div className="sticky">
@@ -71,10 +71,11 @@ const MyCompanies = () => {
           {showNewCompanyForm && <button type="submit">Submit</button>}
           </div>
         </form>
-
+        </div>
     </>
   )
 }
+
 
 
 export default MyCompanies

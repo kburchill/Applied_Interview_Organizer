@@ -35,6 +35,7 @@ const MyApplications = () => {
     setSelectedApplication(null)
     setShowEditApplicationForm(false);
     setShowNewApplicationForm(false);
+    return
   };
 
   //Handle delete
@@ -92,13 +93,13 @@ const MyApplications = () => {
 
   const renderEditForm = (key) => {
     return (
-        <>
-              <form id={key} className="edit_application_form" onSubmit={editApplication}>
-                <div onClick={() => closeApplicationForm()}>X EDIT FORM</div>
-                {showEditApplicationForm && <CreateApplicationForm />}
-                <button type="submit">Update</button>
-              </form>
-        </>
+      <>
+        <form id={key} className="edit_application_form" onSubmit={editApplication}>
+          <div onClick={() => closeApplicationForm()}>X EDIT FORM</div>
+          {showEditApplicationForm && <CreateApplicationForm />}
+          <button type="submit">Update</button>
+        </form>
+      </>
     )
   }
 
@@ -108,13 +109,13 @@ const MyApplications = () => {
         return (
           <>
             <div id="list">
-            <div className="each-holder">
-              <div className="lines"></div>
-              <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
-                <div>{applications[key].company_id}</div>
-                <button onClick={() => handleDelete(key)}>X</button>
+              <div className="each-holder">
+                <div className="lines"></div>
+                <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
+                  <div>{applications[key].company_id}</div>
+                  <button onClick={() => handleDelete(key)}>X</button>
+                </div>
               </div>
-            </div>
             </div>
           </>
         )
@@ -125,18 +126,18 @@ const MyApplications = () => {
   return (
     <>
       <div className="applications-block" id="applications-block">
-          <h4>Applications</h4>
-          {renderApplications()}
-          <button onClick={openNewApplicationForm}>Record New Application</button>
+        <h4>Applications</h4>
+        {renderApplications()}
+        <button onClick={openNewApplicationForm}>Record New Application</button>
       </div>
-
-
-        <form className="create_application_form" onSubmit={submitApplication}>
-          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
-          {showNewApplicationForm && <CreateApplicationForm />}
-          {showNewApplicationForm && <button type="submit">I Applied!</button>}
-        </form>
-          {selectedApplication && renderEditForm()}
+      <div id="applications-form">
+      <form className="create_application_form" onSubmit={submitApplication}>
+        {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
+        {showNewApplicationForm && <CreateApplicationForm />}
+        {showNewApplicationForm && <button type="submit">I Applied!</button>}
+        {selectedApplication && renderEditForm()}
+      </form>
+      </div>
     </>
   )
 }

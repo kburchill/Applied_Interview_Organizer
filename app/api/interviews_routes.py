@@ -65,8 +65,7 @@ def interview_create():
                 'user_id': new_interview.user_id,
                 'interview_type': new_interview.interview_type
             })
-        interview = {'interview': [
-            new_interview.id, interview_info[0]]}
+        interview = {'interview': [new_interview.id, interview_info[0]]}
         return interview
 
 # Patch Routes

@@ -12,15 +12,26 @@ const CreateInterviewForm = () => {
   const user = useSelector(state => state.session.user)
   const interview = useSelector(state => state.interviews.selected)
 
-  const int_sent_date = new Date(interview[1].date) || new Date()
-  const int_date_value = int_sent_date.toISOString().substring(0, 10);
+
+    let int_sent_date;
+    let int_date_value;
+    let int_completed = false;
+    let int_contact = null;
+    let int_type = null;
+  if (interview){
+    int_completed = interview[1].completed
+    int_sent_date = new Date(interview[1].date)
+    int_date_value = int_sent_date.toISOString().substring(0, 10);
+    int_contact = interview[1].contact_name
+    int_type = interview[1].interview_type
+  }
 
   //States
   const [company_id, setCompany_id] = useState(1);
-  const [completed, setCompleted] = useState(interview[1].completed);
+  const [completed, setCompleted] = useState(int_completed);
   const [date, setDate] = useState(int_date_value);
-  const [contact_name, setContact_name] = useState(interview[1].contact_name);
-  const [interview_type, setInterview_type] = useState(interview[1].interview_type);
+  const [contact_name, setContact_name] = useState(int_contact);
+  const [interview_type, setInterview_type] = useState();
 
   const userId = user.id;
 

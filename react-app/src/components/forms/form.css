@@ -39,7 +39,7 @@
   display: flex;
 }
 
-.form-body > .view-false {
+.form-body > .view-false, .view-null {
   visibility: hidden;
 }
 

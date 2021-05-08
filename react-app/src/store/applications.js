@@ -2,8 +2,8 @@ const LOAD = "applications/LOAD";
 const ADD = "applications/ADD";
 const REMOVE = "applications/REMOVE";
 const EDIT = 'applications/EDIT';
-const SELECT = 'applciations/SELECT';
-
+const SELECT = 'applications/SELECT';
+const REMOVE_SELECTED = 'applications/REMOVE_SELECTED';
 const load = applications => ({
   type: LOAD,
   payload: applications
@@ -28,6 +28,11 @@ const selected = application => ({
   type: SELECT,
   payload: application
 })
+
+const remove_selected = () => ({
+  type: REMOVE_SELECTED
+})
+
 
 // Get all applications
 export const get_applications = () => async (dispatch) => {
@@ -60,10 +65,8 @@ export const create_application = (info) => async (dispatch) => {
       "user_id": info.user_id
     })
   });
-
   if (response.ok) {
     const application = await response.json();
-    console.log(application)
     dispatch(add(application))
     return true;
   }
@@ -116,6 +119,10 @@ export const selected_application = (application_id) => async (dispatch) => {
   dispatch(selected(application_id))
 }
 
+export const remove_selected_application = () => async (dispatch) => {
+  dispatch(remove_selected())
+}
+
 const initialState = {}
 
 const applicationReducer = (state = initialState, action) => {
@@ -140,6 +147,9 @@ const applicationReducer = (state = initialState, action) => {
       const selected_app_id = action.payload;
       const selected_app_info = state.applications[selected_app_id]
       state['selected'] = [selected_app_id, selected_app_info]
+      return state
+    case REMOVE_SELECTED:
+      delete state['selected']
       return state
     default:
       return state

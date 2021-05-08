@@ -79,7 +79,6 @@ export const get_company_interviews = (company_id) => async (dispatch) => {
 
 // Create an interview
 export const create_interview = (info) => async (dispatch) => {
-  console.log("INSIDE FETCH STORE", info)
   const response = await fetch('/api/interviews/', {
     method: 'POST',
     headers: {

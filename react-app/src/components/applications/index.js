@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_applications, delete_application, create_application, update_application, selected_application } from "../../store/applications"
+import { get_applications, delete_application, create_application, update_application, selected_application, remove_selected_application } from "../../store/applications"
 import { create_interview, get_interviews } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 import './applications.css'
@@ -18,10 +18,11 @@ const MyApplications = () => {
   const dispatch = useDispatch();
 
   //State handlers
-  const openNewApplicationForm = () => {
+  const openNewApplicationForm = async () => {
     if (showNewApplicationForm) return;
     if (showEditApplicationForm) setShowEditApplicationForm(false);
     closeApplicationForm();
+    await dispatch(remove_selected_application())
     setShowNewApplicationForm(true);
   };
 
@@ -42,6 +43,8 @@ const MyApplications = () => {
   //Handle delete
   const handleDelete = async (id) => {
     const loaded = await dispatch(delete_application(id))
+    await dispatch(remove_selected_application())
+    setSelectedApplication(null)
     setLoaded(loaded)
   }
 
@@ -122,8 +125,8 @@ const MyApplications = () => {
                 <div className="lines"></div>
                 <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
                   <div>{applications[key].company_id}</div>
-                  <button onClick={() => handleDelete(key)}>X</button>
                 </div>
+                  <button onClick={() => handleDelete(key)}>X</button>
               </div>
             </div>
           </>
@@ -141,7 +144,7 @@ const MyApplications = () => {
       </div>
       <div id="applications-form">
         <form className="create_application_form" onSubmit={submitApplication}>
-          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X <div>CREATE FORM</div></div>}
+          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X</div>}
           {showNewApplicationForm && <CreateApplicationForm />}
           {showNewApplicationForm && <button type="submit">I Applied!</button>}
           {selectedApplication && renderEditForm(selectedApplication)}

@@ -166,7 +166,7 @@ const MyApplications = () => {
                 <div className="lines"></div>
                 <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
                   <div>{companies[current_application.company_id].name}</div>
-                  <div>{current_application.response && " Yes"}{!current_application.response && " No"}</div>
+                  <div>{current_application.response && current_application.interview && " Interview:"}{!current_application.response && " No Response"}{current_application.response && !current_application.interview && " No Interview"}</div>
                   <div>{current_application.interview_id && `${interview_date}`}</div>
                   <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
                 </div>

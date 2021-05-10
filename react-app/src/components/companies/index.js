@@ -76,13 +76,15 @@ const MyCompanies = () => {
     const company = companies[key];
     return (
       <>
-        <div className="form-body">
+        <div className="form-body" >
+            <div id="company-info">Company Info</div>
             <div>{company.name}</div>
             <div>City: {company.city}</div>
             <div>State: {company.state}</div>
             <div>Address 1: {company.address_1}</div>
             <div>Address 2: {company.address_2}</div>
             <div>Job Listings <a href={company.job_openings}>Job Openings</a></div>
+
         </div>
       </>
     )

@@ -63,11 +63,10 @@ const MyCompanies = () => {
   const renderNewForm = () => {
     return (
       <>
-        <form className="form-body" onSubmit={submitCompany}>
-          <div className="close-button" onClick={() => setShowNewCompanyForm(false)}></div>
+        <form className="form-body" onSubmit={submitCompany} autocomplete="off">
+          <div className="close-button" onClick={() => setShowNewCompanyForm(false)}>X</div>
           {showNewCompanyForm && <CreateCompanyForm />}
           <button type="submit">Submit</button>
-
         </form>
       </>
     )
@@ -77,13 +76,13 @@ const MyCompanies = () => {
     const company = companies[key];
     return (
       <>
-        <div className="company-info">
-          <div>{company.name}</div>
-          <div>City: {company.city}</div>
-          <div>State: {company.state}</div>
-          <div>Address 1: {company.address_1}</div>
-          <div>Address 2: {company.address_2}</div>
-          <div>Job Listings <a href={company.job_openings}>Job Openings</a></div>
+        <div className="form-body">
+            <div>{company.name}</div>
+            <div>City: {company.city}</div>
+            <div>State: {company.state}</div>
+            <div>Address 1: {company.address_1}</div>
+            <div>Address 2: {company.address_2}</div>
+            <div>Job Listings <a href={company.job_openings}>Job Openings</a></div>
         </div>
       </>
     )

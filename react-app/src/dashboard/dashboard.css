@@ -143,3 +143,7 @@ h4 {
 .new {
   color: green;
 }
+
+.form-input {
+  border-bottom: 1px dotted black;
+}

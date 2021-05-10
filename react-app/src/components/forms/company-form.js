@@ -35,7 +35,6 @@ const CreateCompanyForm = () => {
 
   return (
     <>
-      <div>
         <label>Company Name</label>
         <input
           name="company-name"
@@ -43,8 +42,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setName(e.target.value)}
           className="form-input"
         />
-      </div>
-      <div>
         <label>City</label>
         <input
           name="city"
@@ -52,8 +49,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setCity(e.target.value)}
           className="form-input"
         />
-      </div>
-      <div>
         <label>State</label>
         <input
           name="state"
@@ -61,8 +56,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setState(e.target.value)}
           className="form-input"
         />
-      </div>
-      <div>
         <label>Address-1</label>
         <input
           name="address-1"
@@ -70,8 +63,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setAddress1(e.target.value)}
           className="form-input"
         />
-      </div>
-      <div>
         <label>Address-2</label>
         <input
           name="address-2"
@@ -79,8 +70,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setAddress2(e.target.value)}
           className="form-input"
         />
-      </div>
-      <div>
         <label>Job Listings Page</label>
         <input
           name="job-listings"
@@ -88,7 +77,6 @@ const CreateCompanyForm = () => {
           onChange={(e) => setJob_openings(e.target.value)}
           className="form-input"
         />
-      </div>
     </>
   );
 };

@@ -8,9 +8,9 @@ const NavBar = () => {
   return (
     <nav className="navbar-block">
         <div id="dashboard-button">
-          <NavLink to="/dashboard" exact={true} activeClassName="active">
+          {/* <NavLink to="/dashboard" exact={true} activeClassName="active">
             Dashboard
-          </NavLink>
+          </NavLink> */}
         </div>
         <div>
           <LogoutButton />

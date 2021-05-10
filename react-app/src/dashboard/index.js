@@ -51,9 +51,7 @@ const MainBody = () => {
   }
   return (
     <div className="main__container">
-      <div onClick={() => setDashboard()}>
-      <NavBar />
-      </div>
+      <NavBar/>
       <div className="container-labels">
         <div onClick={() => setCompanies()} className="company-label">Companies</div>
         <div onClick={() => setApplications()} className="application-label">Applications</div>

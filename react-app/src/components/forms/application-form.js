@@ -21,7 +21,7 @@ const CreateApplicationForm = () => {
   let interview_date_value;
   let interview_contact_value = null;
   let interview_type_value = null;
-  let app_company_name = "Search"
+  let app_company_name = "Results"
   let app_company_id = 1;
   if (application) {
     app_respone_value = application[1].response;
@@ -86,7 +86,6 @@ const CreateApplicationForm = () => {
 
   const search_companies = (input) => {
       setCompany_id(input)
-      const companies_keys = Object.keys(companies)
       const return_array = []
       for (const company in companies){
           const company_name = companies[company].name
@@ -105,12 +104,12 @@ const CreateApplicationForm = () => {
 
   return (
     <>
-
       <label>Where did you apply?</label>
       <div className="autocomplete">
       <input onChange={(e) => search_companies(e.target.value)}
        name="company"
        type="text"
+       placeholder={company_name}
        className={`form-input`}
       />
       <div>{company_name}</div>

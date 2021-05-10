@@ -39,6 +39,17 @@
   border: none;
   display: flex;
 }
+.form-body > .autocomplete {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.autocomplete > input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px dotted gray;
+}
 
 .form-body > .close-button {
   margin-left: 95%;
@@ -61,4 +72,3 @@
   position: relative;
   display: inline-block
 }
-

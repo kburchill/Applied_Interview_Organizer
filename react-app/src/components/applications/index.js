@@ -106,7 +106,7 @@ const MyApplications = () => {
   const renderEditForm = (key) => {
     return (
       <>
-        <form id={key} className="form-body" onSubmit={editApplication}>
+        <form id={key} className="form-body" onSubmit={editApplication} autocomplete="off">
           <div className="close-button" onClick={() => closeApplicationForm()}>X</div>
           {showEditApplicationForm && <CreateApplicationForm />}
           <button type="submit">Update</button>
@@ -118,7 +118,7 @@ const MyApplications = () => {
   const renderNewForm = () => {
     return (
       <>
-        <form className="form-body" onSubmit={submitApplication}>
+        <form className="form-body" onSubmit={submitApplication} autocomplete="off">
           <div className="close-button" onClick={() => setShowNewApplicationForm(false)}>X</div>
           {showNewApplicationForm && <CreateApplicationForm />}
           <button type="submit">I Applied!</button>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import { useDispatch} from "react-redux";
 import MyCompanies from "../components/companies"
 import MyInterviews from "../components/interviews"
 import MyApplications from "../components/applications"
+import { get_companies } from "../store/companies"
 import NavBar from "../components/navbar"
 import './dashboard.css'
 
@@ -15,6 +16,11 @@ const MainBody = () => {
   const [showCompanies, setShowCompanies] = useState(false);
   const [showApplications, setShowApplications] = useState(false);
   const [showInterviews, setShowInterviews] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(get_companies())
+  }, [dispatch])
 
   const setCompanies = () => {
     setShowCompanies(true)

@@ -57,10 +57,8 @@
   font-size: 15px;
 }
 
-/* .form-body:hover {
-	box-shadow:10px 10px 7px rgba(0,0,0,.7);
-  transform: scale(1.25);
-  position:relative;
-  z-index:5;
-	transition: transform .15s linear;
-} */
+.autocomplete {
+  position: relative;
+  display: inline-block
+}
+

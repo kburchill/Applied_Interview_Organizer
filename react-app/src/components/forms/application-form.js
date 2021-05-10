@@ -12,6 +12,7 @@ const CreateApplicationForm = () => {
   //Variables
   const user = useSelector(state => state.session.user)
   const application = useSelector(state => state.applications.selected)
+  const companies = useSelector(state => state.companies)
 
   let app_sent_value;
   let app_respone_value = false;
@@ -20,9 +21,12 @@ const CreateApplicationForm = () => {
   let interview_date_value;
   let interview_contact_value = null;
   let interview_type_value = null;
-
+  let app_company_name = "Search"
+  let app_company_id = 1;
   if (application) {
     app_respone_value = application[1].response;
+    app_company_name = companies[application[1].company_id].name;
+    app_company_id = application[1].company_id;
     interview_response_value = application[1].interview;
     interview_contact_value = application[1].contact_name;
     interview_type_value = application[1].interview_type;
@@ -48,7 +52,8 @@ const CreateApplicationForm = () => {
     }
   }
   //States
-  const [company_id, setCompany_id] = useState(1);
+  const [company_id, setCompany_id] = useState(app_company_id);
+  const [company_name, setCompany_name] = useState(app_company_name);
   const [sent_out, setSent_date] = useState(app_sent_value)
   const [response, setResponse] = useState(app_respone_value);
   const [response_date, setResponse_date] = useState(response_date_value);
@@ -58,6 +63,7 @@ const CreateApplicationForm = () => {
   const [interview_type, setInterview_type] = useState(interview_type_value);
   const [showResponse, setShowResponse] = useState(false);
   const [showInterview, setShowInterview] = useState(false);
+  const [search, setSearch] = useState("Search")
 
   const userId = user.id;
 
@@ -78,14 +84,37 @@ const CreateApplicationForm = () => {
     setShowInterview(interview);
   }, [response, interview])
 
+  const search_companies = (input) => {
+      setCompany_id(input)
+      const companies_keys = Object.keys(companies)
+      const return_array = []
+      for (const company in companies){
+          const company_name = companies[company].name
+          if (company_name.includes(input)){
+            return_array.push([company, companies[company].name])
+          }
+      }
+      if (return_array.length >= 1){
+        setCompany_name(return_array[0][1])
+        setCompany_id(return_array[0][0])
+      } else {
+        setCompany_name("No results")
+      }
+  }
+
+
   return (
     <>
+
       <label>Where did you apply?</label>
-      <select onChange={(e) => setCompany_id(e.target.value)}>
-        <option selected value="1">Apple</option>
-        <option value="2">Facebook</option>
-        <option value="3">Amazon</option>
-      </select>
+      <div className="autocomplete">
+      <input onChange={(e) => search_companies(e.target.value)}
+       name="company"
+       type="text"
+       className={`form-input`}
+      />
+      <div>{company_name}</div>
+      </div>
       <label>When did you send your application?</label>
       <input
         name="date"

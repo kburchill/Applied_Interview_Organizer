@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_companies, create_company } from "../../store/companies"
+import { create_company } from "../../store/companies"
 import { get_applications, selected_application } from "../../store/applications"
 import CreateCompanyForm, { form_info } from "../forms/company-form"
 import './companies.css'
@@ -36,9 +36,6 @@ const MyCompanies = () => {
     setSelectedCompany(false);
     return
   }
-  useEffect(() => {
-    dispatch(get_companies())
-  }, [dispatch])
 
   useEffect(() => {
     if (applications) return

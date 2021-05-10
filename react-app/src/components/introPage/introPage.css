@@ -1,0 +1,37 @@
+@keyframes fadein {
+  from {
+    opacity: 0%;
+    scale: 0;
+  }
+  to {
+    opacity: 100%;
+    scale: 1;
+  }
+}
+
+.intro-page {
+  display: flex;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 10%;
+  flex-direction: column;
+  padding-top: 5%;
+  padding-bottom: 20%;
+  justify-content: center;
+  animation-duration: 2s;
+  justify-content: center;
+  align-items: center;
+  animation-name: fadein;
+  background: rgba(243, 239, 239, 0.5);
+  border-radius: 20.5px;
+  padding: 10px;
+  min-width: 50%;
+}
+
+.intro-page > * {
+  align-self: center;
+}
+
+.intro-page > h1 {
+  font-size: 40px;
+}

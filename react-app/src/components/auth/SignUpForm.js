@@ -120,7 +120,6 @@ const SignUpForm = () => {
               Sign Up
             </button>
           </div>
-
           <div>
             <a href="/login" className="login-link">
               Have an account? Login here!

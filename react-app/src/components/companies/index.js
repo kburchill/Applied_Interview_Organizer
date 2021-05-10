@@ -83,7 +83,7 @@ const MyCompanies = () => {
             <div>State: {company.state}</div>
             <div>Address 1: {company.address_1}</div>
             <div>Address 2: {company.address_2}</div>
-            <div>Job Listings <a href={company.job_openings}>Job Openings</a></div>
+            <div><a href={company.job_openings}> Job Openings</a></div>
 
         </div>
       </>

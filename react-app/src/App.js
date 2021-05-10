@@ -43,9 +43,6 @@ function App() {
         <ProtectedRoute path="/dashboard" exact={true} >
             <MainBody />
         </ProtectedRoute>
-        {/* <ProtectedRoute path="/users" exact={true} >
-          <UsersList />
-        </ProtectedRoute> */}
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
         </ProtectedRoute>

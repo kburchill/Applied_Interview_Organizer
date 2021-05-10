@@ -95,8 +95,6 @@ export const create_interview = (info) => async (dispatch) => {
       'date': info.date,
       'contact_name': info.contact_name,
       'completed': info.completed,
-      'company_id': info.company_id,
-      'user_id': info.user_id,
       'interview_type': info.interview_type
     })
   });

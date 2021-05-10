@@ -7,7 +7,7 @@ import "./navbar.css"
 const NavBar = () => {
   return (
     <nav className="navbar-block">
-        <div>
+        <div id="dashboard-button">
           <NavLink to="/dashboard" exact={true} activeClassName="active">
             Dashboard
           </NavLink>

@@ -4,6 +4,7 @@ const REMOVE = "applications/REMOVE";
 const EDIT = 'applications/EDIT';
 const SELECT = 'applications/SELECT';
 const REMOVE_SELECTED = 'applications/REMOVE_SELECTED';
+
 const load = applications => ({
   type: LOAD,
   payload: applications

@@ -15,6 +15,7 @@ const MyCompanies = () => {
   const [showCompanyInfo, setShowCompanyInfo] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState()
   const [loaded, setLoaded] = useState(false);
+
   const dispatch = useDispatch();
 
 

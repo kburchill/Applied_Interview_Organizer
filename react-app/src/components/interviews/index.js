@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { get_interviews, create_interview, update_interview, delete_interview, selected_interview } from "../../store/interviews"
+import { get_interviews, create_interview, update_interview, delete_interview, selected_interview, remove_selected_interview } from "../../store/interviews"
 import { get_applications } from "../../store/applications"
 import CreateInterviewForm, { form_info } from "../forms/interview-form"
 import './interviews.css'
@@ -18,10 +18,11 @@ const MyInterviews = () => {
 
   const dispatch = useDispatch();
 
-  const openNewInterviewForm = () => {
+  const openNewInterviewForm = async () => {
     if (showNewInterviewForm) return;
     if (showEditInterviewForm) setShowEditInterviewForm(false);
     closeInterviewForm();
+    await dispatch(remove_selected_interview())
     setShowNewInterviewForm(true);
   };
 
@@ -68,6 +69,7 @@ const MyInterviews = () => {
     const info = form_info()
     const loaded = await dispatch(create_interview(info))
     setLoaded(loaded)
+    setSelectedInterview(null)
     closeInterviewForm();
   }
 

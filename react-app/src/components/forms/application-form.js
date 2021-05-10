@@ -23,6 +23,7 @@ const CreateApplicationForm = () => {
   let interview_type_value = null;
   let app_company_name = "Results"
   let app_company_id = 1;
+  
   if (application) {
     app_respone_value = application[1].response;
     app_company_name = companies[application[1].company_id].name;
@@ -63,7 +64,7 @@ const CreateApplicationForm = () => {
   const [interview_type, setInterview_type] = useState(interview_type_value);
   const [showResponse, setShowResponse] = useState(false);
   const [showInterview, setShowInterview] = useState(false);
-  const [search, setSearch] = useState("Search")
+
 
   const userId = user.id;
 

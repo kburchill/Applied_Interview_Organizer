@@ -86,10 +86,22 @@ const MyInterviews = () => {
   const renderEditForm = (key) => {
     return (
       <>
-        <form id={key} className="edit_interview-form" onSubmit={editInterview}>
-          <div onClick={() => closeInterviewForm()}>X EDIT I FORM</div>
-          {showEditInterviewForm && <CreateInterviewForm />}
-          <button type="submit">Update</button>
+          <form id={key} className="form-body" onSubmit={editInterview}>
+            <div className="close-button" onClick={() => closeInterviewForm()}>X</div>
+            {showEditInterviewForm && <CreateInterviewForm />}
+            <button type="submit">Update Interview</button>
+          </form>
+      </>
+    )
+  }
+
+  const renderNewForm = () => {
+    return (
+      <>
+        <form className="form-body" onSubmit={submitInterview}>
+        <div className="close-button" onClick={() => setShowNewInterviewForm(false)}>X</div>
+        {showNewInterviewForm && <CreateInterviewForm />}
+        {<button type="submit">Create Interview!</button>}
         </form>
       </>
     )
@@ -122,13 +134,9 @@ const MyInterviews = () => {
         <button onClick={openNewInterviewForm}>Record New Interview</button>
       </div>
       <div id="interviews-form">
-        <form className="create_interview_form" onSubmit={submitInterview}>
-          {showNewInterviewForm && <div onClick={() => setShowNewInterviewForm(false)}>X<div>CREATE INT FORM</div></div>}
-          {showNewInterviewForm && <CreateInterviewForm />}
-          {showNewInterviewForm && <button type="submit">Create Interview!</button>}
-          {selectedInterview && renderEditForm()}
-        </form>
-      </div>
+            {showNewInterviewForm && renderNewForm()}
+            {selectedInterview && renderEditForm()}
+        </div>
     </>
   )
 }

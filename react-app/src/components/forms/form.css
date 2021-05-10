@@ -15,9 +15,10 @@
     color:#000;
     background-color:#ffc;
     display:block;
-    height:16em;
-    width:16em;
-    padding:1em;
+    height:17em;
+    width:17em;
+    padding-right:1em;
+    padding-left:1em;
     margin-left: 2em;
     margin-top: 3em;
     margin-right: 1em;
@@ -39,6 +40,15 @@
   display: flex;
 }
 
+.form-body > .close-button {
+  margin-left: 95%;
+  margin-bottom: 1%;
+  margin-top: 5px;
+}
+.form-body > button {
+  border: 2px solid black;
+  margin-left: 77%;
+}
 .form-body > .view-false, .view-null {
   visibility: hidden;
 }

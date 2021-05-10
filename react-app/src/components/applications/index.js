@@ -106,10 +106,22 @@ const MyApplications = () => {
   const renderEditForm = (key) => {
     return (
       <>
-        <form id={key} className="edit_application_form" onSubmit={editApplication}>
-          <div id="close-button" onClick={() => closeApplicationForm()}>X</div>
+        <form id={key} className="form-body" onSubmit={editApplication}>
+          <div className="close-button" onClick={() => closeApplicationForm()}>X</div>
           {showEditApplicationForm && <CreateApplicationForm />}
           <button type="submit">Update</button>
+        </form>
+      </>
+    )
+  }
+
+  const renderNewForm = () => {
+    return (
+      <>
+        <form className="form-body" onSubmit={submitApplication}>
+          <div className="close-button" onClick={() => setShowNewApplicationForm(false)}>X</div>
+          {showNewApplicationForm && <CreateApplicationForm />}
+          <button type="submit">I Applied!</button>
         </form>
       </>
     )
@@ -143,12 +155,8 @@ const MyApplications = () => {
         <button onClick={openNewApplicationForm}>Record New Application</button>
       </div>
       <div id="applications-form">
-        <form className="create_application_form" onSubmit={submitApplication}>
-          {showNewApplicationForm && <div onClick={() => setShowNewApplicationForm(false)}>X</div>}
-          {showNewApplicationForm && <CreateApplicationForm />}
-          {showNewApplicationForm && <button type="submit">I Applied!</button>}
+          {showNewApplicationForm && renderNewForm()}
           {selectedApplication && renderEditForm(selectedApplication)}
-        </form>
       </div>
     </>
   )

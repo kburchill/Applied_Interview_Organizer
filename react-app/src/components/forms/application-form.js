@@ -79,7 +79,7 @@ const CreateApplicationForm = () => {
   }, [response, interview])
 
   return (
-    <div className="form-body">
+    <>
       <label>Where did you apply?</label>
       <select onChange={(e) => setCompany_id(e.target.value)}>
         <option selected value="1">Apple</option>
@@ -137,7 +137,7 @@ const CreateApplicationForm = () => {
         onChange={(e) => setInterview_type(e.target.value)}
         className={`form-input view-${showInterview}`}
       />
-    </div>
+    </>
   );
 };
 

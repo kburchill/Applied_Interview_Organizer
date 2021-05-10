@@ -12,12 +12,14 @@ const CreateInterviewForm = () => {
   const user = useSelector(state => state.session.user)
   const interview = useSelector(state => state.interviews.selected)
 
-
+  //Variables to set state to originally
     let int_sent_date;
     let int_date_value;
     let int_completed = false;
     let int_contact = null;
     let int_type = null;
+
+  //Set them to these if there is a selected interview
   if (interview){
     int_completed = interview[1].completed
     int_sent_date = new Date(interview[1].date)
@@ -45,7 +47,7 @@ const CreateInterviewForm = () => {
   }
 
   return (
-    <div className="form-body">
+    <>
       <div>
         <label>Let's get your interview on the Calendar!</label>
         <input
@@ -89,7 +91,7 @@ const CreateInterviewForm = () => {
           <option selected value="false">No</option>
         </select>
       </div>
-    </div>
+  </>
   );
 };
 

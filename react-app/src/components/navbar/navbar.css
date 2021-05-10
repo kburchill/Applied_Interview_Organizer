@@ -4,6 +4,17 @@
   justify-content: space-between;
 }
 
-.navbar-block > * {
-  border: 1px solid red;
+.navbar-block > * > a {
+  text-decoration: none;
+  color: white;
+  font-size: 30px;
+  margin: 20px;
+}
+
+.navbar-block > * > button {
+  background: transparent;
+  font-size: 30px;
+  color: white;
+  border: none;
+  padding: none;
 }

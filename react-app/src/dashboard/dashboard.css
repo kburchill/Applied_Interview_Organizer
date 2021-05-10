@@ -136,10 +136,10 @@ h4 {
 
 }
 
-#add_button {
-  background: transparent;
-  border: none;
-  margin-left: 75%;
-  font-size: 20px;
-  color: rgb(58, 58, 136);
+h4 {
+  padding-left: 10%;
+}
+
+.new {
+  color: green;
 }

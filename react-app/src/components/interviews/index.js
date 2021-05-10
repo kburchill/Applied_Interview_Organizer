@@ -9,7 +9,7 @@ import './interviews.css'
 const MyInterviews = () => {
   const applications = useSelector(state => state.applications.applications);
   const interviews = useSelector(state => state.interviews.interviews);
-
+  const companies = useSelector(state => state.companies)
 
   const [showNewInterviewForm, setShowNewInterviewForm] = useState(false);
   const [showEditInterviewForm, setShowEditInterviewForm] = useState(false);
@@ -43,7 +43,7 @@ const MyInterviews = () => {
     const loaded = await dispatch(delete_interview(id))
     setLoaded(loaded)
   }
-  
+
   useEffect(() => {
     if (interviews) return
     dispatch(get_interviews())
@@ -112,14 +112,25 @@ const MyInterviews = () => {
   const renderInterviews = () => {
     return (
       interviews && Object.keys(interviews).map(key => {
+        const interview_date = new Date(interviews[key].date)
+        const todays_date = new Date()
+        const difference = Math.abs(interview_date - todays_date)
+        const difference_days = Math.ceil(difference / (1000 * 60 * 60 * 24))
+        let upcoming = false;
+        if (difference_days <= 7){
+          upcoming = true;
+        }
+
         return (
           <>
             <div id="list">
               <div className="each-holder">
                 <div className="lines"></div>
                 <div className="each-interview" id="li" onClick={() => openEditInterviewForm(key)}>
-                  <div>{interviews[key].company_id} company id</div>
-                  <button onClick={() => handleDelete(key)}>X</button>
+                  <div>{companies[interviews[key].company_id].name}</div>
+                  <div className="upcoming">{upcoming && interview_date.toISOString().substring(0, 10)}</div>
+                  <div className="not-upcoming">{!upcoming && interview_date.toISOString().substring(0, 10)}</div>
+                  <button id="delete_interview" onClick={() => handleDelete(key)}>X</button>
                 </div>
               </div>
             </div>
@@ -133,7 +144,12 @@ const MyInterviews = () => {
     <>
       <div className="interviews-block" id="interviews-block">
         <h4>Interviews</h4>
-        <button id="add_button" onClick={openNewInterviewForm}>Record New Interview</button>
+        <div id="list">
+          <div className="each-holder new">
+          <div className="lines"></div>
+          <div id="li" onClick={() => openNewInterviewForm()}>New Interview</div>
+          </div>
+        </div>
         {renderInterviews()}
 
       </div>

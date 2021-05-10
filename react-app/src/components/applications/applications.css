@@ -10,19 +10,42 @@
   min-height: 20px;
   padding: 5px;
 }
+.each-application > * {
+  width: 25%;
+}
 
 
 #delete_application {
   margin-right: 5%;
+  margin-left: 5%;
   background: transparent;
   border: none;
   border-bottom: none;
+  width: 5%;
 }
 
-.each-holder > #delete_application:hover {
+#delete_application:hover {
   transform: scale(1.25);
 }
 
 .each-holder:hover {
   background-color: rgb(235, 240, 197);
 }
+
+#list_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 10%;
+}
+
+.list-header > * {
+  width: 30%;
+}
+
+/* #add_button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: rgb(58, 58, 136);
+} */

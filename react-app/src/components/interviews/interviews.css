@@ -12,7 +12,32 @@
   padding: 5px;
 }
 
+.each-interview > * {
+  width: 25%;
+}
 .each-interview:hover {
   height: 100px;
   transition: all 2s ease 1s;
 }
+
+#delete_interview {
+  margin-right: 5%;
+  margin-left: 5%;
+  background: transparent;
+  border: none;
+  border-bottom: none;
+  width: 5%;
+}
+
+#delete_interview:hover {
+  transform: scale(1.25);
+}
+
+.upcoming {
+  color: red;
+}
+.not-upcoming {
+  color: green;
+}
+
+

@@ -168,8 +168,9 @@ const MyApplications = () => {
                   <div>{companies[current_application.company_id].name}</div>
                   <div>{current_application.response && " Yes"}{!current_application.response && " No"}</div>
                   <div>{current_application.interview_id && `${interview_date}`}</div>
+                  <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
                 </div>
-                <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
+
               </div>
             </div>
           </>
@@ -182,7 +183,12 @@ const MyApplications = () => {
     <>
       <div className="applications-block" id="applications-block">
         <h4>Applications</h4>
-        <button id="add_button" onClick={openNewApplicationForm}>Record New Application</button>
+        <div id="list">
+          <div className="each-holder new">
+          <div className="lines"></div>
+          <div id="li" onClick={() => openNewApplicationForm()}>New Application</div>
+          </div>
+        </div>
         {renderApplications()}
 
       </div>

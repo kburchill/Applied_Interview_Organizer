@@ -43,6 +43,7 @@ const MyInterviews = () => {
     const loaded = await dispatch(delete_interview(id))
     setLoaded(loaded)
   }
+  
   useEffect(() => {
     if (interviews) return
     dispatch(get_interviews())

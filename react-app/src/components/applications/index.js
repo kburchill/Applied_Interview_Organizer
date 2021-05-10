@@ -8,6 +8,7 @@ import './applications.css'
 const MyApplications = () => {
   //State
   const applications = useSelector(state => state.applications.applications);
+  const companies = useSelector(state => state.companies);
   const interviews = useSelector(state => state.interviews)
 
   const [showNewApplicationForm, setShowNewApplicationForm] = useState(false);
@@ -75,6 +76,7 @@ const MyApplications = () => {
   const submitApplication = async (e) => {
     e.preventDefault();
     const info = form_info()
+
     const interview_info = {
       company_id: info.company_id,
       user_id: info.user_id,
@@ -83,10 +85,15 @@ const MyApplications = () => {
       completed: false,
       interview_type: info.interview_type
     }
-    const loaded = await dispatch(create_application(info))
+
     if (info.response) {
-      await dispatch(create_interview(interview_info))
+      const response = await dispatch(create_interview(interview_info))
+      if (response) {
+        info['interview_id'] = response['interview'][0]
+      }
     }
+    const loaded = await dispatch(create_application(info))
+
     setLoaded(loaded);
     closeApplicationForm();
   }
@@ -98,6 +105,22 @@ const MyApplications = () => {
     const application_info = {}
     application_info[id] = info;
     const loaded = await dispatch(update_application(application_info))
+
+    const interview_info = {
+      company_id: info.company_id,
+      user_id: info.user_id,
+      date: info.interview_date,
+      contact_name: info.interview_contact,
+      completed: false,
+      interview_type: info.interview_type
+    }
+
+    if (info.response) {
+      const response = await dispatch(create_interview(interview_info))
+      if (response) {
+        info['interview_id'] = response['interview'][0]
+      }
+    }
     setLoaded(loaded)
     closeApplicationForm();
   }
@@ -129,16 +152,24 @@ const MyApplications = () => {
 
   const renderApplications = () => {
     return (
-      applications && Object.keys(applications).map(key => {
+      interviews && applications && Object.keys(applications).map(key => {
+        const current_application = applications[key]
+        let interview_date = null;
+        if (interviews.interviews[current_application.interview_id]) {
+          interview_date = new Date(interviews.interviews[current_application.interview_id].date)
+          interview_date = interview_date.toISOString().substring(0, 10)
+        }
         return (
           <>
             <div id="list">
               <div className="each-holder">
                 <div className="lines"></div>
                 <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
-                  <div>{applications[key].company_id}</div>
+                  <div>{companies[current_application.company_id].name}</div>
+                  <div>{current_application.response && " Yes"}{!current_application.response && " No"}</div>
+                  <div>{current_application.interview_id && `${interview_date}`}</div>
                 </div>
-                  <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
+                <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
               </div>
             </div>
           </>
@@ -156,8 +187,8 @@ const MyApplications = () => {
 
       </div>
       <div id="applications-form">
-          {showNewApplicationForm && renderNewForm()}
-          {selectedApplication && renderEditForm(selectedApplication)}
+        {showNewApplicationForm && renderNewForm()}
+        {selectedApplication && renderEditForm(selectedApplication)}
       </div>
     </>
   )

@@ -56,7 +56,8 @@ def create_application():
             response_date=form.data["response_date"],
             interview=form.data["interview"],
             company_id=form.data["company_id"],
-            user_id=form.data["user_id"]
+            user_id=form.data["user_id"],
+            interview_id=form.data["interview_id"]
         )
         db.session.add(new_application)
         db.session.commit()

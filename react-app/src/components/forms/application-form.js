@@ -12,6 +12,7 @@ const CreateApplicationForm = () => {
   //Variables
   const user = useSelector(state => state.session.user)
   const application = useSelector(state => state.applications.selected)
+  const interviews = useSelector(state => state.interviews.interviews)
   const companies = useSelector(state => state.companies)
 
   let app_sent_value;
@@ -23,13 +24,13 @@ const CreateApplicationForm = () => {
   let interview_type_value = null;
   let app_company_name = "Results"
   let app_company_id = 1;
-  
+
   if (application) {
     app_respone_value = application[1].response;
     app_company_name = companies[application[1].company_id].name;
     app_company_id = application[1].company_id;
     interview_response_value = application[1].interview;
-    interview_contact_value = application[1].contact_name;
+
     interview_type_value = application[1].interview_type;
     if (application[1].sent_out) {
       const app_sent_date = new Date(application[1].sent_out) || new Date()
@@ -45,8 +46,10 @@ const CreateApplicationForm = () => {
       response_date_value = null
     }
 
-    if (application[1].interview_date) {
-      const app_interview_date = new Date(application[1].interview_date)
+    if (application[1].interview_id) {
+      const interview = interviews[application[1].interview_id];
+      const app_interview_date = new Date(interview.date)
+      interview_contact_value = interviews[application[1].interview_id].contact_name;
       interview_date_value = app_interview_date.toISOString().substring(0, 10);
     } else {
       interview_date_value = null

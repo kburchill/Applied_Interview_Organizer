@@ -63,7 +63,8 @@ export const create_application = (info) => async (dispatch) => {
       "response_date": info.response_date,
       "interview": info.interview,
       "company_id": info.company_id,
-      "user_id": info.user_id
+      "user_id": info.user_id,
+      "interview_id": info.interview_id
     })
   });
   if (response.ok) {

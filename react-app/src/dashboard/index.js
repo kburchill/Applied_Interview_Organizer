@@ -4,6 +4,8 @@ import MyCompanies from "../components/companies"
 import MyInterviews from "../components/interviews"
 import MyApplications from "../components/applications"
 import { get_companies } from "../store/companies"
+import { get_applications } from "../store/applications"
+import { get_interviews } from "../store/interviews"
 import NavBar from "../components/navbar"
 import './dashboard.css'
 
@@ -20,6 +22,8 @@ const MainBody = () => {
 
   useEffect(() => {
     dispatch(get_companies())
+    dispatch(get_applications())
+    dispatch(get_interviews())
   }, [dispatch])
 
   const setCompanies = () => {

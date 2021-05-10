@@ -104,7 +104,7 @@ export const create_interview = (info) => async (dispatch) => {
   if (response.ok) {
     const interview = await response.json();
     dispatch(add(interview))
-    return true;
+    return interview;
   }
 }
 

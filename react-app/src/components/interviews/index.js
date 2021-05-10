@@ -101,7 +101,7 @@ const MyInterviews = () => {
         <form className="form-body" onSubmit={submitInterview}>
         <div className="close-button" onClick={() => setShowNewInterviewForm(false)}>X</div>
         {showNewInterviewForm && <CreateInterviewForm />}
-        {<button type="submit">Create Interview!</button>}
+        {<button id="add_button" type="submit">Create Interview!</button>}
         </form>
       </>
     )
@@ -130,8 +130,9 @@ const MyInterviews = () => {
     <>
       <div className="interviews-block" id="interviews-block">
         <h4>Interviews</h4>
+        <button id="add_button" onClick={openNewInterviewForm}>Record New Interview</button>
         {renderInterviews()}
-        <button onClick={openNewInterviewForm}>Record New Interview</button>
+
       </div>
       <div id="interviews-form">
             {showNewInterviewForm && renderNewForm()}

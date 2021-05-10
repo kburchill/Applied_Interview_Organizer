@@ -138,7 +138,7 @@ const MyApplications = () => {
                 <div className="each-application" id="li" onClick={() => openEditApplicationForm(key)}>
                   <div>{applications[key].company_id}</div>
                 </div>
-                  <button onClick={() => handleDelete(key)}>X</button>
+                  <button id="delete_application" onClick={() => handleDelete(key)}>X</button>
               </div>
             </div>
           </>
@@ -151,8 +151,9 @@ const MyApplications = () => {
     <>
       <div className="applications-block" id="applications-block">
         <h4>Applications</h4>
+        <button id="add_button" onClick={openNewApplicationForm}>Record New Application</button>
         {renderApplications()}
-        <button onClick={openNewApplicationForm}>Record New Application</button>
+
       </div>
       <div id="applications-form">
           {showNewApplicationForm && renderNewForm()}

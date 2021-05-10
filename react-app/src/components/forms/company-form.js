@@ -34,7 +34,7 @@ const CreateCompanyForm = () => {
   //We can add update in here and use this form
 
   return (
-    <div className="form-body">
+    <>
       <div>
         <label>Company Name</label>
         <input
@@ -89,8 +89,7 @@ const CreateCompanyForm = () => {
           className="form-input"
         />
       </div>
-    </div>
-
+    </>
   );
 };
 

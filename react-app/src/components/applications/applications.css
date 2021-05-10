@@ -12,3 +12,17 @@
 }
 
 
+#delete_application {
+  margin-right: 5%;
+  background: transparent;
+  border: none;
+  border-bottom: none;
+}
+
+.each-holder > #delete_application:hover {
+  transform: scale(1.25);
+}
+
+.each-holder:hover {
+  background-color: rgb(235, 240, 197);
+}

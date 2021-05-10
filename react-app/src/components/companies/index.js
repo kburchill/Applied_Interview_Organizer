@@ -20,6 +20,7 @@ const MyCompanies = () => {
 
   const openNewCompanyForm = () => {
     if (showNewCompanyForm) return;
+    closeCompanyInfo();
     setShowNewCompanyForm(true);
   };
 
@@ -32,6 +33,7 @@ const MyCompanies = () => {
   const closeCompanyInfo = () => {
     setShowNewCompanyForm(false);
     setShowCompanyInfo(false);
+    setSelectedCompany(false);
     return
   }
   useEffect(() => {
@@ -66,9 +68,21 @@ const MyCompanies = () => {
     setShowNewCompanyForm(false);
   }
 
+  const renderNewForm = () => {
+    return (
+      <>
+        <form className="form-body" onSubmit={submitCompany}>
+          <div className="close-button" onClick={() => setShowNewCompanyForm(false)}></div>
+          {showNewCompanyForm && <CreateCompanyForm />}
+          <button type="submit">Submit</button>
+
+        </form>
+      </>
+    )
+  }
+
   const renderCompanyInfo = (key) => {
     const company = companies[key];
-    console.log("WE ARE HAPPENING", companies[key])
     return (
           <>
             <div className="company-info">
@@ -89,7 +103,7 @@ const MyCompanies = () => {
       companies && Object.keys(companies).map(key => {
         const company = companies[key]
         return (
-          <div class="each-holder">
+          <div id="list" class="each-holder">
             <div class="lines"></div>
             <div className="each-company" id="li" onClick={() => openCompanyInfo(key)}>
             <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.name}</div>
@@ -104,16 +118,13 @@ const MyCompanies = () => {
     <>
       <div className="companies-block" id="companies-block">
         <h4>Companies</h4>
+        <button id="add_button" onClick={openNewCompanyForm}>Add Company</button>
         <div id="list">{renderCompanies()}</div>
-        <button onClick={openNewCompanyForm}>Add Company</button>
+
       </div>
       <div id="companies-form">
-        <form className="create_company_form" onSubmit={submitCompany}>
-          {showNewCompanyForm && <div onClick={closeCompanyInfo()}>X<div>CREATE FORM</div></div>}
-          {showNewCompanyForm && <CreateCompanyForm />}
-          {showNewCompanyForm && <button type="submit">Submit</button>}
+          {showNewCompanyForm && renderNewForm()}
           {selectedCompany && renderCompanyInfo(selectedCompany)}
-        </form>
       </div>
     </>
   )

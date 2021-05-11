@@ -1,20 +1,15 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton'
 import "./navbar.css"
+import { useSelector } from "react-redux";
 
 
 const NavBar = () => {
+  const user = useSelector(state => state.session.user)
   return (
     <nav className="navbar-block">
-        <div id="dashboard-button">
-          {/* <NavLink to="/dashboard" exact={true} activeClassName="active">
-            Dashboard
-          </NavLink> */}
-        </div>
-        <div>
+        <a href="/dashboard" className="username">{user.username}</a>
           <LogoutButton />
-        </div>
     </nav>
   );
 }

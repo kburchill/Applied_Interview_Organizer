@@ -72,7 +72,9 @@ const CreateInterviewForm = () => {
 
   return (
     <>
-      <label>Let's get your interview on the Calendar!</label>
+      <h3>{!date && "Let's get your interview on the Calendar!"}</h3>
+      <h3>{date && "Interview Info"}</h3>
+      <label>{!date && "When?"}</label>
       <input
         name="date"
         type="date"
@@ -91,14 +93,14 @@ const CreateInterviewForm = () => {
         <div>{company_name}</div>
       </div>
       <label>Who are you in contact with for your interview?</label>
-      <textarea
+      <input
         name="contact-name"
         value={contact_name}
         onChange={(e) => setContact_name(e.target.value)}
         className="form-input"
       />
       <label>What type of interview is this?</label>
-      <textarea
+      <input
         name="interview-type"
         value={interview_type}
         onChange={(e) => setInterview_type(e.target.value)}

@@ -8,6 +8,6 @@ class Interview(db.Model):
     company_id = db.Column(db.Integer, db.ForeignKey("companies.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     date = db.Column(db.Date, nullable=False)
-    contact_name = db.Column(db.String(255), nullable=True)
+    contact_name = db.Column(db.String(50), nullable=True)
     completed = db.Column(db.Boolean)
-    interview_type = db.Column(db.String(255), nullable=False)
+    interview_type = db.Column(db.String(50), nullable=False)

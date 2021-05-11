@@ -4,21 +4,24 @@
   justify-content: space-between;
 }
 
-.navbar-block > * > a {
-  text-decoration: none;
-  color: white;
-  font-size: 30px;
-  margin: 20px;
-}
 
-.navbar-block > * > button {
+.navbar-block > button {
   background: transparent;
   font-size: 30px;
   color: white;
   border: none;
   padding: none;
+  margin-right: 5%;
+  position: fixed;
+  right: 25px;
 }
 
-.navbar-block > * {
-  justify-content: space-between;
+
+.username {
+  text-decoration: none;
+  font-size: 30px;
+  color: white;
+  border: none;
+  padding-left: 15px;
+  position: fixed;
 }

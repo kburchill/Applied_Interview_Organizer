@@ -46,6 +46,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true} >
           <User />
         </ProtectedRoute>
+        <Route path="/">
+          <IntroPage />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

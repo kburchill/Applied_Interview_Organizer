@@ -16,7 +16,7 @@ body {
 .main__container {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 10% 55% 35%;
+	grid-template-columns: 6.5% 58.5% 35%;
 	grid-template-rows: 50px 1fr;
 	grid-template-areas:
 		"navbar navbar navbar"
@@ -88,8 +88,8 @@ grid-area: info;
 	animation-name: fadein;
 }
 h4 {
-  color: #cd0000;
-  font-size: 42px;
+  color: #cc1414de;
+  font-size: 50px;
   letter-spacing: -2px;
   text-align: left;
 }
@@ -123,8 +123,8 @@ h4 {
   -o-transition:      all 0.2s;
 }
 .lines {
-  border-left: 1px solid #ffaa9f;
-  border-right: 1px solid #ffaa9f;
+  border-left: 1px solid #f3a399;
+  border-right: 1px solid #f3a399;
   width: 2px;
   float: left;
   height: 100%;

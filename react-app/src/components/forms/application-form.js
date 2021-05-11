@@ -23,7 +23,7 @@ const CreateApplicationForm = () => {
   let interview_date_value;
   let interview_contact_value = null;
   let interview_type_value = null;
-  let app_company_name = "Results"
+  let app_company_name = "Search"
   let app_company_id = 1;
 
   if (application) {
@@ -32,7 +32,6 @@ const CreateApplicationForm = () => {
     app_company_id = application[1].company_id;
     interview_response_value = application[1].interview;
 
-    interview_type_value = application[1].interview_type;
     if (application[1].sent_out) {
       const app_sent_date = new Date(application[1].sent_out) || new Date()
       app_sent_value = app_sent_date.toISOString().substring(0, 10);
@@ -52,6 +51,7 @@ const CreateApplicationForm = () => {
       const app_interview_date = new Date(interview.date)
       interview_contact_value = interviews[application[1].interview_id].contact_name;
       interview_date_value = app_interview_date.toISOString().substring(0, 10);
+      interview_type_value = interviews[application[1].interview_id].interview_type;
     } else {
       interview_date_value = null
     }
@@ -114,7 +114,7 @@ const CreateApplicationForm = () => {
       <input onChange={(e) => search_companies(e.target.value)}
        name="company"
        type="text"
-       placeholder={company_name}
+       placeholder="Search"
        className={`form-input`}
       />
       <div>{company_name}</div>
@@ -162,9 +162,8 @@ const CreateApplicationForm = () => {
         onChange={(e) => setInterview_contact(e.target.value)}
         className={`form-input view-${showInterview}`}
       />
-      <label className={`view-${showInterview}`} hidden={!interview}>Who type of interview is this?</label>
+      <label className={`view-${showInterview}`} hidden={!interview}>What type of interview is this?</label>
       <input
-        hidden={!interview}
         name="contact-name"
         value={interview_type}
         onChange={(e) => setInterview_type(e.target.value)}

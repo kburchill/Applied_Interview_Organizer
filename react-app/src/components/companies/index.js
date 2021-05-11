@@ -77,8 +77,7 @@ const MyCompanies = () => {
     return (
       <>
         <div className="form-body company-form" >
-            <div id="company-info">Company Info</div>
-            <div>{company.name}</div>
+            <h1 id="company-info">{company.name}</h1>
             <div>City: {company.city}</div>
             <div>State: {company.state}</div>
             <div>{"Address 1: " && company.address_1}</div>

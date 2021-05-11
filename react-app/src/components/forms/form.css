@@ -15,8 +15,8 @@
     color:#000;
     background-color:#ffc;
     display:block;
-    height:17em;
-    width:17em;
+    height:20em;
+    width:20em;
     padding-right:1em;
     padding-left:1em;
     margin-left: 3em;
@@ -32,6 +32,7 @@
     transition: transform .15s linear;
     animation-duration: 1s;
     animation-name: fadein;
+    font-family: 'Architects Daughter', cursive;
 }
 
 .form-body > * {
@@ -43,7 +44,7 @@
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
+  margin-right: 10%;
 }
 .autocomplete > input {
   background: transparent;

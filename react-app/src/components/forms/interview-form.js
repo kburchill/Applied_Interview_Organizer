@@ -19,7 +19,7 @@ const CreateInterviewForm = () => {
   let int_completed = false;
   let int_contact = null;
   let int_type = null;
-  let int_company_name = "Results"
+  let int_company_name = "Search"
   let int_company_id = 1
 
   //Set them to these if there is a selected interview

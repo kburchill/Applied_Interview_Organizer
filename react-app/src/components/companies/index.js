@@ -76,15 +76,14 @@ const MyCompanies = () => {
     const company = companies[key];
     return (
       <>
-        <div className="form-body" >
+        <div className="form-body company-form" >
             <div id="company-info">Company Info</div>
             <div>{company.name}</div>
             <div>City: {company.city}</div>
             <div>State: {company.state}</div>
-            <div>Address 1: {company.address_1}</div>
-            <div>Address 2: {company.address_2}</div>
-            <div><a href={company.job_openings}> Job Openings</a></div>
-
+            <div>{"Address 1: " && company.address_1}</div>
+            <div>{"Address 2: " && company.address_2}</div>
+            <div><a href={company.job_openings} target="_blank"> Job Openings</a></div>
         </div>
       </>
     )
@@ -101,6 +100,7 @@ const MyCompanies = () => {
               <div class="lines"></div>
               <div className="each-company" id="li" onClick={() => openCompanyInfo(key)}>
                 <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.name}</div>
+                <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.state}</div>
               </div>
             </div>
           </div>

@@ -152,10 +152,7 @@ const MyApplications = () => {
     return (
       companies && interviews && applications && Object.keys(applications).map(key => {
         const current_application = applications[key]
-        console.log(key, "here is the key")
-        // console.log(current_application, "current_application HERE ======")
-        // console.log(companies[current_application.company_id], "companies[id] HERE ======")
-        // console.log(current_application.company_id, "application.company_id HERE ======")
+
         let interview_date = null;
         if (interviews.interviews[current_application.interview_id]) {
           interview_date = new Date(interviews.interviews[current_application.interview_id].date)

@@ -8,8 +8,6 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [username, setUsername] = useState("");
-  const [first_name, setFirstname] = useState("");
-  const [last_name, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -17,7 +15,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
       e.preventDefault();
       if (password === repeatPassword) {
-          await dispatch(signUp(username, email, password, first_name, last_name));
+          await dispatch(signUp(username, email, password));
       }
   };
 
@@ -27,12 +25,6 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
       setEmail(e.target.value);
-  };
-  const updateFirstname = (e) => {
-      setFirstname(e.target.value);
-  };
-  const updateLastname = (e) => {
-      setLastname(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -52,7 +44,6 @@ const SignUpForm = () => {
       <div className="signup-form-div">
         <form onSubmit={onSignUp} id="signup-form">
           <div className="sign-up-logo">
-            {/* <img src={'/images/SignUp.png'} alt="Sign Up" /> */}
           </div>
           <div className="signup-form-div__row">
             <label>User Name</label>
@@ -62,26 +53,6 @@ const SignUpForm = () => {
               placeholder="User Name"
               onChange={updateUsername}
               value={username}
-            ></input>
-          </div>
-          <div className="signup-form-div__row">
-            <label>First Name</label>
-            <input
-              type="text"
-              name="first_name"
-              placeholder="First Name"
-              onChange={updateFirstname}
-              value={first_name}
-            ></input>
-          </div>
-          <div className="signup-form-div__row">
-            <label>Last Name</label>
-            <input
-              type="text"
-              name="last_name"
-              placeholder="Last Name"
-              onChange={updateLastname}
-              value={last_name}
             ></input>
           </div>
           <div className="signup-form-div__row">

@@ -69,7 +69,71 @@ def seed_interviews():
     db.session.add(interview6)
     db.session.commit()
 
+    interview7 = Interview(
+        company_id=1,
+        user_id=2,
+        date="2021-04-16",
+        contact_name="Becky",
+        completed=False,
+        interview_type="Behavior"
+    )
+    db.session.add(interview7)
+    db.session.commit()
 
+    interview8 = Interview(
+        company_id=2,
+        user_id=2,
+        date="2021-05-25",
+        contact_name="Julia",
+        completed=False,
+        interview_type="Behavior"
+    )
+    db.session.add(interview8)
+    db.session.commit()
+
+    interview9 = Interview(
+        company_id=4,
+        user_id=2,
+        date="2021-05-20",
+        contact_name="Tom",
+        completed=False,
+        interview_type="Technical"
+    )
+    db.session.add(interview9)
+    db.session.commit()
+
+    interview10 = Interview(
+        company_id=5,
+        user_id=2,
+        date="2021-05-16",
+        contact_name="Betty",
+        completed=False,
+        interview_type="Technical"
+    )
+    db.session.add(interview10)
+    db.session.commit()
+
+    interview11 = Interview(
+        company_id=5,
+        user_id=2,
+        date="2021-06-16",
+        contact_name="Teddy",
+        completed=False,
+        interview_type="Technical"
+    )
+    db.session.add(interview11)
+    db.session.commit()
+
+    interview12 = Interview(
+        company_id=6,
+        user_id=2,
+        date="2021-07-16",
+        contact_name="Ralph",
+        completed=True,
+        interview_type="Technical"
+    )
+    db.session.add(interview12)
+    db.session.commit()
 
 
 def undo_interviews():

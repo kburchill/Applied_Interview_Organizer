@@ -119,10 +119,6 @@ h4 {
 
 #list > .li:hover {
   background-color: #f0f0f0;
-  -webkit-transition: all 0.2s;
-  -moz-transition:    all 0.2s;
-  -ms-transition:     all 0.2s;
-  -o-transition:      all 0.2s;
 }
 .lines {
   border-left: 1px solid #f3a399;

@@ -90,7 +90,6 @@ const MyInterviews = () => {
   }
 
   const renderEditForm = (key) => {
-    console.log(key)
     return (
       <>
           <form id={key} className="form-body" onSubmit={editInterview} autocomplete="off">

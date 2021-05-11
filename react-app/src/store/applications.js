@@ -75,8 +75,10 @@ export const create_application = (info) => async (dispatch) => {
 }
 
 // Update an applicaion
-export const update_application = (info) => async (dispatch) => {
-  const application_id = Object.keys(info)[0]
+export const update_application = (app_info) => async (dispatch) => {
+  const application_id = Object.keys(app_info)[0]
+  const info = app_info[application_id]
+  console.log(app_info, "HERE IS INFO")
   const response = await fetch(`/api/applications/${application_id}`, {
     method: 'PATCH',
     headers: {
@@ -94,7 +96,7 @@ export const update_application = (info) => async (dispatch) => {
 
   if (response.ok) {
     await response.json();
-    dispatch(edit(info))
+    dispatch(edit(app_info))
     return true;
   }
   return false;

@@ -5,6 +5,7 @@ import './form.css'
 let info = {}
 
 export const form_info = () => {
+  console.log(info, "HERE IS THE INFO")
   return info;
 }
 
@@ -128,8 +129,8 @@ const CreateApplicationForm = () => {
       />
       <label>Have you heard back?</label>
       <select value={`${response}`} onChange={(e) => setResponse(e.target.value)}>
-        <option value="false">No</option>
-        <option value="true">Yes</option>
+        <option value={false}>No</option>
+        <option value={true}>Yes</option>
       </select>
       <label className={`view-${showResponse}`}>Awesome! When did you hear back?</label>
       <input
@@ -142,8 +143,8 @@ const CreateApplicationForm = () => {
       />
       <label className={`view-${showResponse}`}>Do you have an interview date?</label>
       <select value={`${interview}`} className={`view-${showResponse}`} onChange={(e) => setInterview(e.target.value)}>
-        <option value="false">No</option>
-        <option value="true">Yes</option>
+        <option value={false}>No</option>
+        <option value={true}>Yes</option>
       </select>
       <label className={`view-${showInterview}`}>Woohoo! When is your interview?</label>
       <input

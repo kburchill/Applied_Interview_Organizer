@@ -130,10 +130,10 @@ const MyInterviews = () => {
               <div className="each-holder">
                 <div className="lines"></div>
                 <div className="each-interview" id="li" onClick={() => openEditInterviewForm(key)}>
-                  <div>{!interviews[key].completed && companies[interviews[key].company_id].name}</div>
-                  <div>{interviews[key].completed && companies[interviews[key].company_id].name}</div>
-                  <div className="upcoming">{upcoming && interview_date.toISOString().substring(0, 10)}</div>
-                  <div className="not-upcoming">{!upcoming && interview_date.toISOString().substring(0, 10)}</div>
+                  <div>{companies[interviews[key].company_id].name}</div>
+                  <div>{interviews[key].completed && "Completed"}</div>
+                  <div className="upcoming">{!interviews[key].completed && upcoming && interview_date.toISOString().substring(0, 10)}</div>
+                  <div className="not-upcoming">{!interviews[key].completed && !upcoming && interview_date.toISOString().substring(0, 10)}</div>
                   <button id="delete_interview" onClick={() => handleDelete(key)}>X</button>
                 </div>
               </div>

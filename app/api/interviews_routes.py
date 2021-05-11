@@ -82,7 +82,7 @@ def interview_edit(interview_id):
     form = InterviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-
+    print(form.data)
     if form.validate_on_submit():
         interview.company_id = form.data["company_id"],
         interview.user_id = form.data["user_id"],

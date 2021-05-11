@@ -8,19 +8,25 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(username, password));
+    const data = await dispatch(login(email, password));
     if (data.errors) {
       setErrors(data.errors);
     }
   };
 
-  const updateUsername = (e) => {
-    setUsername(e.target.value);
+  const loginDemo = async () => {
+    setEmail("demo@aa.io")
+    setPassword("password")
+    console.log(email, password, "HERE")
+  };
+
+  const updateEmail = (e) => {
+    setEmail(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -36,18 +42,14 @@ const LoginForm = () => {
       <div className="main-body">
         <div className="login-form-div">
           <form onSubmit={onLogin} id="login-form">
-            <div className="login-logo">
-              Put a logo here
-              {/* <img src={'/images/LogIn.png'} alt="Log In" /> */}
-            </div>
             <div className="login-form-div__row">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="email">Email</label>
               <input
-                name="username"
+                name="email"
                 type="text"
-                placeholder="Username"
-                value={username}
-                onChange={updateUsername}
+                placeholder="email"
+                value={email}
+                onChange={updateEmail}
                 autoComplete="off"
               />
             </div>
@@ -67,6 +69,11 @@ const LoginForm = () => {
                 Login
               </button>
             </div>
+            <div className="buttonDiv" onClick={() => loginDemo()}>
+              <button className="demo-button-submit" type="submit">
+                Demo
+              </button>
+            </div>
             <div>
               {errors.map((error) => (
                 <div className="error">{error}</div>
@@ -77,6 +84,7 @@ const LoginForm = () => {
                 Need an account? Sign up here!
               </a>
             </div>
+
           </form>
         </div>
       </div>

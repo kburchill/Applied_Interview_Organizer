@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <nav className="navbar-block">
         <a href="/dashboard" className="username">{user.username}</a>
-          <LogoutButton />
+        <LogoutButton />
     </nav>
   );
 }

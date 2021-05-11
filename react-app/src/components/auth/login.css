@@ -79,7 +79,7 @@ html {
   letter-spacing: 1.6px;
 }
 
-.login-button-submit {
+.login-button-submit, .demo-button-submit {
   background: #E1BF9A;
   border-radius: 6px;
   font-size: 15px;
@@ -93,7 +93,7 @@ html {
   width: 150px;
 }
 
-.login-button-submit:hover {
+.login-button-submit:hover, .demo-button-submit:hover {
   background: white;
 }
 

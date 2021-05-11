@@ -218,7 +218,7 @@ def seed_applications():
         user_id=1,
         interview=False
     )
-    db.session.add(application21)
+    db.session.add(application20)
     db.session.commit()
 
     application11 = Application(

@@ -41,7 +41,7 @@ grid-area: info;
 	text-orientation: upright;
 	writing-mode: vertical-lr;
 	height: 100%;
-	margin-top: 10%;
+	margin-top: 5%;
   position: fixed;
   top: 0%;
 }

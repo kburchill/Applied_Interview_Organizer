@@ -57,7 +57,7 @@ const MainBody = () => {
         <div onClick={() => setApplications()} className="application-label">Applications</div>
         <div onClick={() => setInterviews()} className="interview-label">Interviews</div>
       </div>
-      {showDashboard && <MyUpcomingInterviews />}
+      {/* {showDashboard && <MyUpcomingInterviews />} */}
       {showCompanies && <MyCompanies />}
       {showApplications && <MyApplications />}
       {showInterviews && <MyInterviews />}

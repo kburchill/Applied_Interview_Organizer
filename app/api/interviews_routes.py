@@ -15,7 +15,8 @@ def interview_data():
     Provides all interviews associated with current user
     """
     if (current_user.is_authenticated):
-        query_interviews = Interview.query.filter(Interview.user_id == current_user.id)
+        query_interviews = Interview.query.filter(
+            Interview.user_id == current_user.id)
         interviews = {}
         for interview in query_interviews:
             interview_info = []
@@ -76,9 +77,12 @@ def interview_edit(interview_id):
     """
     Update an interview
     """
+
     interview = Interview.query.get(interview_id)
     form = InterviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
+
     if form.validate_on_submit():
         interview.company_id = form.data["company_id"],
         interview.user_id = form.data["user_id"],
@@ -86,6 +90,7 @@ def interview_edit(interview_id):
         interview.contact_name = form.data["contact_name"],
         interview.company_id = form.data["company_id"],
         interview.interview_type = form.data["interview_type"]
+        interview.completed = form.data["completed"]
 
         db.session.commit()
     return {'message': 'Update complete'}

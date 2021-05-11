@@ -115,12 +115,12 @@ export const update_interview = (info) => async (dispatch) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      "sent_out": info.sent_out,
-      "response": info.response,
-      "response_date": info.response_date,
-      "interview": info.interview,
       "company_id": info.company_id,
-      "user_id": info.user_id
+      "user_id": info.user_id,
+      "date": info.date,
+      'contact_name': info.contact_name,
+      'completed': info.completed,
+      'interview_type': info.interview_type
     })
   });
 

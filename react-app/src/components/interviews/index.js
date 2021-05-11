@@ -37,10 +37,13 @@ const MyInterviews = () => {
     setSelectedInterview(null)
     setShowEditInterviewForm(false);
     setShowNewInterviewForm(false);
+    return
   };
 
   const handleDelete = async (id) => {
     const loaded = await dispatch(delete_interview(id))
+    await dispatch(remove_selected_interview())
+    setSelectedInterview(null)
     setLoaded(loaded)
   }
 
@@ -69,14 +72,13 @@ const MyInterviews = () => {
     e.preventDefault();
     const info = form_info()
     const loaded = await dispatch(create_interview(info))
+
     setLoaded(loaded)
-    setSelectedInterview(null)
     closeInterviewForm();
   }
 
   const editInterview = async (e) => {
     e.preventDefault();
-
     const info = form_info()
     const id = e.target.id
     const interview_info = {}
@@ -87,12 +89,13 @@ const MyInterviews = () => {
   }
 
   const renderEditForm = (key) => {
+    console.log(key)
     return (
       <>
-          <form id={key} className="form-body" onSubmit={editInterview}>
+          <form id={key} className="form-body" onSubmit={editInterview} autocomplete="off">
             <div className="close-button" onClick={() => closeInterviewForm()}>X</div>
             {showEditInterviewForm && <CreateInterviewForm />}
-            <button type="submit">Update Interview</button>
+            <button type="submit">Update</button>
           </form>
       </>
     )
@@ -127,7 +130,8 @@ const MyInterviews = () => {
               <div className="each-holder">
                 <div className="lines"></div>
                 <div className="each-interview" id="li" onClick={() => openEditInterviewForm(key)}>
-                  <div>{companies[interviews[key].company_id].name}</div>
+                  <div>{!interviews[key].completed && companies[interviews[key].company_id].name}</div>
+                  <div>{interviews[key].completed && companies[interviews[key].company_id].name}</div>
                   <div className="upcoming">{upcoming && interview_date.toISOString().substring(0, 10)}</div>
                   <div className="not-upcoming">{!upcoming && interview_date.toISOString().substring(0, 10)}</div>
                   <button id="delete_interview" onClick={() => handleDelete(key)}>X</button>
@@ -155,7 +159,7 @@ const MyInterviews = () => {
       </div>
       <div id="interviews-form">
             {showNewInterviewForm && renderNewForm()}
-            {selectedInterview && renderEditForm()}
+            {selectedInterview && renderEditForm(selectedInterview)}
         </div>
     </>
   )

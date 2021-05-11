@@ -71,12 +71,9 @@ const MyApplications = () => {
     renderEditForm(selectedApplication)
   }, [selectedApplication])
 
-
-
   const submitApplication = async (e) => {
     e.preventDefault();
     const info = form_info()
-
     const interview_info = {
       company_id: info.company_id,
       user_id: info.user_id,
@@ -99,6 +96,7 @@ const MyApplications = () => {
   }
 
   const editApplication = async (e) => {
+
     e.preventDefault();
     const info = form_info()
     const id = e.target.id

@@ -221,14 +221,14 @@ def seed_applications():
     db.session.add(application20)
     db.session.commit()
 
-    application11 = Application(
+    application21 = Application(
         sent_out="2021-04-15",
         response=False,
         company_id=7,
         user_id=2,
         interview=False
     )
-    db.session.add(application20)
+    db.session.add(application21)
     db.session.commit()
 
 def undo_applications():

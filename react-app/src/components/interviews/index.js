@@ -80,10 +80,10 @@ const MyInterviews = () => {
   const editInterview = async (e) => {
     e.preventDefault();
     const info = form_info()
+    console.log(info.completed, "HERE IS COMPLETED")
     const id = e.target.id
-    console.log(e)
+    console.log(e, "HERE IS THE event")
     info['interview_id'] = id
-    console.log(info, "HERE IS INFO")
     const loaded = await dispatch(update_interview(info))
     setLoaded(loaded)
     closeInterviewForm();
@@ -124,9 +124,10 @@ const MyInterviews = () => {
         if (difference_days <= 7){
           upcoming = true;
         }
-        console.log(key, "here is the key")
-        console.log(interviews[key], "here is the interview")
-        console.log(companies[interviews[key]], "here is the company")
+        // console.log(key, "here is the key")
+        // console.log(interviews[key].completed, "here is the interview completed")
+        // console.log(companies, "companies")
+        // console.log(companies[interviews[key].company_id], "here is the company")
         return (
           <>
             <div id="list">

@@ -28,7 +28,8 @@ def interview_data():
                     'contact_name': interview.contact_name,
                     'company_id': interview.company_id,
                     'user_id': interview.user_id,
-                    'interview_type': interview.interview_type
+                    'interview_type': interview.interview_type,
+                    'completed': interview.completed
                 })
             interviews[interview.id] = interview_info[0]
         return interviews
@@ -81,7 +82,7 @@ def interview_edit(interview_id):
     interview = Interview.query.get(interview_id)
     form = InterviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    interview_info = {}
     print(form.data)
     if form.validate_on_submit():
         interview.company_id = form.data["company_id"],
@@ -91,9 +92,16 @@ def interview_edit(interview_id):
         interview.company_id = form.data["company_id"],
         interview.interview_type = form.data["interview_type"]
         interview.completed = form.data["completed"]
+        interview_info["company_id"] = form.data["company_id"],
+        interview_info["user_id"] = form.data["user_id"],
+        interview_info["date"] = form.data["date"],
+        interview_info["contact_name"] = form.data["contact_name"],
+        interview_info["company_id"] = form.data["company_id"],
+        interview_info["interview_type"] = form.data["interview_type"]
+        interview_info["completed"] = form.data["completed"]
 
         db.session.commit()
-    return {'message': 'Update complete'}
+    return {'interview': interview_info}
 # Delete Routes
 
 

@@ -106,8 +106,8 @@ const CreateInterviewForm = () => {
       />
       <label>Interview completed</label>
       <select value={completed} onChange={(e) => setCompleted(e.target.value)}>
-        <option value="true">Yes</option>
-        <option selected value="false">No</option>
+        <option value={true}>Yes</option>
+        <option selected value={false}>No</option>
       </select>
     </>
   );

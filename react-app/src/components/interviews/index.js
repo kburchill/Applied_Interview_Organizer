@@ -81,9 +81,10 @@ const MyInterviews = () => {
     e.preventDefault();
     const info = form_info()
     const id = e.target.id
-    const interview_info = {}
-    interview_info[id] = info;
-    const loaded = await dispatch(update_interview(interview_info))
+    console.log(e)
+    info['interview_id'] = id
+    console.log(info, "HERE IS INFO")
+    const loaded = await dispatch(update_interview(info))
     setLoaded(loaded)
     closeInterviewForm();
   }
@@ -114,7 +115,7 @@ const MyInterviews = () => {
   }
   const renderInterviews = () => {
     return (
-      interviews && Object.keys(interviews).map(key => {
+      companies && interviews && Object.keys(interviews).map(key => {
         const interview_date = new Date(interviews[key].date)
         const todays_date = new Date()
         const difference = Math.abs(interview_date - todays_date)

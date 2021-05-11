@@ -108,8 +108,11 @@ export const create_interview = (info) => async (dispatch) => {
 
 // Update an interview
 export const update_interview = (interview_info) => async (dispatch) => {
-  const interview_id = Object.keys(interview_info)[0]
-  const info = interview_info[interview_id]
+
+  const interview_id = interview_info.interview_id
+  const info = interview_info
+  console.log(interview_id, "INTERVIEW ID ==========")
+  console.log(interview_info, "INTERVIEW Info ==========")
   const response = await fetch(`/api/interviews/${interview_id}`, {
     method: 'PATCH',
     headers: {

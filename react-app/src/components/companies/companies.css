@@ -14,18 +14,16 @@
   height: 100%vh;
 }
 
-.each-company:hover {
-  height: 100px;
-  transition: all 2s ease 1s;
-}
 
 .each-company {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-right: 5%;
 }
 
-.applied-true {
-  opacity: 15%;
+.applied-false {
+  color: rgb(255, 123, 0);
+
 }
 
 
@@ -36,3 +34,4 @@
 .company-form > * {
   padding: 5px;
 }
+

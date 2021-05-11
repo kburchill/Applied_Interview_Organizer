@@ -7,6 +7,7 @@ import './signup.css';
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
+  const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +43,7 @@ const SignUpForm = () => {
   return (
     <div className="main-body">
       <div className="signup-form-div">
-        <form onSubmit={onSignUp} id="signup-form">
+        <form onSubmit={onSignUp} id="signup-form" autocomplete="off">
           <div className="sign-up-logo">
           </div>
           <div className="signup-form-div__row">
@@ -53,6 +54,7 @@ const SignUpForm = () => {
               placeholder="User Name"
               onChange={updateUsername}
               value={username}
+              required={true}
             ></input>
           </div>
           <div className="signup-form-div__row">
@@ -63,6 +65,7 @@ const SignUpForm = () => {
               placeholder="Email"
               onChange={updateEmail}
               value={email}
+              required={true}
             ></input>
           </div>
           <div className="signup-form-div__row">
@@ -73,6 +76,7 @@ const SignUpForm = () => {
               placeholder="Password"
               onChange={updatePassword}
               value={password}
+              required={true}
             ></input>
           </div>
           <div className="signup-form-div__row">

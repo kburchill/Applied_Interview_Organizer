@@ -124,7 +124,9 @@ const MyInterviews = () => {
         if (difference_days <= 7){
           upcoming = true;
         }
-
+        console.log(key, "here is the key")
+        console.log(interviews[key], "here is the interview")
+        console.log(companies[interviews[key]], "here is the company")
         return (
           <>
             <div id="list">

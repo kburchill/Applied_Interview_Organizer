@@ -173,8 +173,8 @@ const interviewReducer = (state = initialState, action) => {
       state['interviews'][new_interview[0]] = new_interview[1]
       return state
     case EDIT:
-      const interview_id = Object.keys(action.payload)[0]
-      const interview_info = Object.values(action.payload)[0]
+      const interview_id = action.payload.interview_id;
+      const interview_info = action.payload;
       state['interviews'][interview_id] = interview_info;
       return state
     case REMOVE:

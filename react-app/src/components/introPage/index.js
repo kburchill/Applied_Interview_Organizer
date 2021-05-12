@@ -5,7 +5,7 @@ const IntroPage = () => {
   return (
     <div className="intro-page">
       <h1>
-        Organize your Job Search with Applied
+        Job searching. Simplified.
       </h1>
       <a href="/sign-up" className="signup-link">
         Need an account? Sign up here!

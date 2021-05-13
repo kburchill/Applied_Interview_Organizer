@@ -78,7 +78,6 @@ export const create_application = (info) => async (dispatch) => {
 export const update_application = (app_info) => async (dispatch) => {
   const application_id = Object.keys(app_info)[0]
   const info = app_info[application_id]
-  console.log(app_info, "HERE IS INFO")
   const response = await fetch(`/api/applications/${application_id}`, {
     method: 'PATCH',
     headers: {

@@ -5,7 +5,6 @@ import './form.css'
 let info = {}
 
 export const form_info = () => {
-  console.log(info, "HERE IS THE INFO")
   return info;
 }
 

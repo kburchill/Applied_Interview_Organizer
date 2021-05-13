@@ -86,8 +86,8 @@ grid-area: info;
   margin: 0 auto;
   padding: 0;
 	height: fit-content;
-	animation-duration: 1s;
-	animation-name: fadein;
+	/* animation-duration: 1s;
+	animation-name: fadein; */
 }
 h4 {
   color: #cc1414de;

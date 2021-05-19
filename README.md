@@ -20,3 +20,12 @@ Welcome to Applied, and Interview Organization Application.
 4. Notify users of upcoming interviews, and give them associated information
 5. Single Page Application with minimal querries
 
+## How did it turn out?
+![Alt text](https://github.com/kburchill/Applied_Interview_Organizer/blob/main/assets/Screen%20Shot%202021-05-19%20at%209.57.05%20AM.png)
+
+## What's next?
+1. Ability to organize companies by city or state
+2. Updated dashboard to show upcoming interviews
+3. Small bug fixes
+4. Additional information about companies
+5. Admin users to edit companies

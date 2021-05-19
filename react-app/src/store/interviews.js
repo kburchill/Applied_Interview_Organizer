@@ -111,8 +111,7 @@ export const update_interview = (interview_info) => async (dispatch) => {
 
   const interview_id = interview_info.interview_id
   const info = interview_info
-  console.log(info.completed, "INTERVIEW true/false ==========")
-  // console.log(interview_info, "INTERVIEW Info ==========")
+
   const response = await fetch(`/api/interviews/${interview_id}`, {
     method: 'PATCH',
     headers: {
@@ -173,7 +172,6 @@ const interviewReducer = (state = initialState, action) => {
       state['interviews'][new_interview[0]] = new_interview[1]
       return state
     case EDIT:
-      console.log(action.payload, "PAYLOAD HERE")
       const interview = action.payload
       const interview_id = interview.interview_id;
       state['interviews'][interview_id] = interview;

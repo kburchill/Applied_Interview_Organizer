@@ -22,7 +22,6 @@ const LoginForm = () => {
   const loginDemo = async () => {
     setEmail("demo@aa.io")
     setPassword("password")
-    console.log(email, password, "HERE")
   };
 
   const updateEmail = (e) => {

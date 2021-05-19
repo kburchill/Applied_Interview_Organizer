@@ -80,9 +80,7 @@ const MyInterviews = () => {
   const editInterview = async (e) => {
     e.preventDefault();
     const info = form_info()
-    console.log(info.completed, "HERE IS COMPLETED")
     const id = e.target.id
-    console.log(e, "HERE IS THE event")
     info['interview_id'] = id
     const loaded = await dispatch(update_interview(info))
     setLoaded(loaded)

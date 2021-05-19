@@ -86,8 +86,7 @@ def application_update(application_id):
     application = Application.query.get(application_id)
     form = ApplicationForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print("HERE WE LOOK****************555555*********************************************************",
-          form.data, application)
+
     if form.validate_on_submit():
         application.sent_out = form.data["sent_out"]
         application.response = form.data["response"]

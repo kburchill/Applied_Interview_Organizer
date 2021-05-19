@@ -1,6 +1,6 @@
 # Applied Interview Organizer
 
-Welcome to Applied, and Interview Organization Application.
+Welcome to Applied, an Interview Organization Application.
 
 ## What did I use?
 

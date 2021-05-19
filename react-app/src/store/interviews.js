@@ -111,6 +111,7 @@ export const update_interview = (interview_info) => async (dispatch) => {
 
   const interview_id = interview_info.interview_id
   const info = interview_info
+
   const response = await fetch(`/api/interviews/${interview_id}`, {
     method: 'PATCH',
     headers: {

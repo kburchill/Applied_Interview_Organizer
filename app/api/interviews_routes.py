@@ -43,6 +43,7 @@ def interview_create():
     Create an interview
     """
     form = InterviewForm()
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_interview = Interview(

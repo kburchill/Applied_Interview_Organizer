@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { get_applications, delete_application, create_application, update_application, selected_application, remove_selected_application } from "../../store/applications"
-import { create_interview, get_interviews } from "../../store/interviews";
+import { create_interview, get_interviews, update_interview } from "../../store/interviews";
 import CreateApplicationForm, { form_info } from "../forms/application-form"
 import './applications.css'
 
@@ -101,10 +101,11 @@ const MyApplications = () => {
     const info = form_info()
     const id = e.target.id
     const application_info = {}
-    application_info[id] = info;
-    const loaded = await dispatch(update_application(application_info))
 
+
+    console.log(id, "ID HERE =====")
     const interview_info = {
+      interview_id: applications[id]["interview_id"],
       company_id: info.company_id,
       user_id: info.user_id,
       date: info.interview_date,
@@ -112,14 +113,26 @@ const MyApplications = () => {
       completed: false,
       interview_type: info.interview_type
     }
-
-    if (info.response) {
+    console.log(info.response, "here-======", interview_info, "next", applications[id], "next", applications[id]["interview_id"])
+    if(interview_info.interview_id){
+      await dispatch(update_interview(interview_info))
+      info['interview_id'] = interview_info.interview_id
+      console.log("WE UPDATED ======")
+      application_info[id] = info;
+      const loaded = await dispatch(update_application(application_info))
+      setLoaded(loaded)
+    }
+    else if (info.response && !interview_info.interview_id) {
       const response = await dispatch(create_interview(interview_info))
       if (response) {
         info['interview_id'] = response['interview'][0]
       }
+      console.log("WE CREATED =======", interview_info, "-=====----", info)
+      application_info[id] = info;
+      const loaded = await dispatch(update_application(application_info))
+      setLoaded(loaded)
     }
-    setLoaded(loaded)
+
     closeApplicationForm();
   }
 
@@ -127,7 +140,7 @@ const MyApplications = () => {
   const renderEditForm = (key) => {
     return (
       <>
-        <form id={key} className="form-body" onSubmit={editApplication} autocomplete="off">
+        <form id={key} className="form-body" onSubmit={editApplication} autoComplete="off">
           <div className="close-button" onClick={() => closeApplicationForm()}>X</div>
           {showEditApplicationForm && <CreateApplicationForm />}
           <button type="submit">Update</button>
@@ -139,7 +152,7 @@ const MyApplications = () => {
   const renderNewForm = () => {
     return (
       <>
-        <form className="form-body" onSubmit={submitApplication} autocomplete="off">
+        <form className="form-body" onSubmit={submitApplication} autoComplete="off">
           <div className="close-button" onClick={() => setShowNewApplicationForm(false)}>X</div>
           {showNewApplicationForm && <CreateApplicationForm />}
           <button type="submit">I Applied!</button>
@@ -149,12 +162,14 @@ const MyApplications = () => {
   }
 
   const renderApplications = () => {
+    console.log("WE HIT UP TOP",)
     return (
       companies && interviews && applications && Object.keys(applications).map(key => {
         const current_application = applications[key]
 
         let interview_date = null;
         if (interviews.interviews[current_application.interview_id]) {
+          console.log("WE HIT THIS HERE")
           interview_date = new Date(interviews.interviews[current_application.interview_id].date)
           interview_date = interview_date.toISOString().substring(0, 10)
         }
@@ -184,8 +199,8 @@ const MyApplications = () => {
         <h4>Applications</h4>
         <div id="list">
           <div className="each-holder new">
-          <div className="lines"></div>
-          <div id="li" onClick={() => openNewApplicationForm()}>New Application</div>
+            <div className="lines"></div>
+            <div id="li" onClick={() => openNewApplicationForm()}>New Application</div>
           </div>
         </div>
         {renderApplications()}

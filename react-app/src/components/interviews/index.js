@@ -90,7 +90,7 @@ const MyInterviews = () => {
   const renderEditForm = (key) => {
     return (
       <>
-          <form id={key} className="form-body" onSubmit={editInterview} autocomplete="off">
+          <form id={key} className="form-body" onSubmit={editInterview} autoComplete="off">
             <div className="close-button" onClick={() => closeInterviewForm()}>X</div>
             {showEditInterviewForm && <CreateInterviewForm />}
             <button type="submit">Update</button>

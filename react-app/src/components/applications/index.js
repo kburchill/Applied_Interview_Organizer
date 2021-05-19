@@ -102,8 +102,6 @@ const MyApplications = () => {
     const id = e.target.id
     const application_info = {}
 
-
-    console.log(id, "ID HERE =====")
     const interview_info = {
       interview_id: applications[id]["interview_id"],
       company_id: info.company_id,
@@ -113,11 +111,10 @@ const MyApplications = () => {
       completed: false,
       interview_type: info.interview_type
     }
-    console.log(info.response, "here-======", interview_info, "next", applications[id], "next", applications[id]["interview_id"])
+    
     if(interview_info.interview_id){
       await dispatch(update_interview(interview_info))
       info['interview_id'] = interview_info.interview_id
-      console.log("WE UPDATED ======")
       application_info[id] = info;
       const loaded = await dispatch(update_application(application_info))
       setLoaded(loaded)
@@ -127,7 +124,7 @@ const MyApplications = () => {
       if (response) {
         info['interview_id'] = response['interview'][0]
       }
-      console.log("WE CREATED =======", interview_info, "-=====----", info)
+
       application_info[id] = info;
       const loaded = await dispatch(update_application(application_info))
       setLoaded(loaded)

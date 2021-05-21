@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import User, db, Company
+from app.models import User, db, Company, Application, Interview
 from app.forms import CompanyForm
 from flask_login import current_user
 import os
@@ -7,7 +7,7 @@ import os
 company_routes = Blueprint("companies", __name__)
 
 
-##Get routes
+# Get routes
 @company_routes.route("/")
 def company_data():
     """
@@ -29,11 +29,13 @@ def company_data():
             companies[company.id] = company_info[0]
         return companies
 
+
 @company_routes.route("/<int:company_id>/applications")
 def company_application_data(company_id):
     """
     Get all applications for current user and a company
     """
+
 
 @company_routes.route("/<int:company_id>/interviews")
 def company_interview_data(company_id):
@@ -41,7 +43,9 @@ def company_interview_data(company_id):
     Get all interviews for current user and a company
     """
 
-## Post routes
+# Post routes
+
+
 @company_routes.route("/", methods=["POST"])
 def company_add():
     """
@@ -73,9 +77,34 @@ def company_add():
         company = {'company': [
             new_company.id, company_info[0]]}
         return company
-## Patch routes
+# Patch routes
+
+
 @company_routes.route("/<int:company_id>", methods=["PATCH"])
 def company_update(company_id):
     """
     Update a company
     """
+
+# Delete Routes
+
+
+@company_routes.route("/<int:company_id>", methods=["DELETE"])
+def company_delete(company_id):
+    """
+    Deletes a company
+    """
+    if current_user.admin:
+
+        company_to_delete = Company.query.get(company_id)
+        applications_present = Application.query.filter(
+            Application.company_id == company_id).all()
+        interviews_present = Interview.query.filter(
+            Interview.company_id == company_id).all()
+
+        if (applications_present or interviews_present):
+            return {"message": "Cannot delete selected company"}, 400
+        db.session.delete(company_to_delete)
+        db.session.commit()
+        return {'message': 'Company Deleted.'}
+    return {'message': "Access denied"}

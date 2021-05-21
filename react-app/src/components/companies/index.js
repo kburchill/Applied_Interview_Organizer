@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { create_company } from "../../store/companies"
+import { create_company, delete_company } from "../../store/companies"
 import CreateCompanyForm, { form_info } from "../forms/company-form"
 import './companies.css'
 
@@ -9,6 +9,7 @@ import './companies.css'
 const MyCompanies = () => {
   const companies = useSelector(state => state.companies);
   const applications = useSelector(state => state.applications.applications);
+  const user = useSelector(state => state.session.user);
 
   const [showNewCompanyForm, setShowNewCompanyForm] = useState(false);
   const [showCompanyInfo, setShowCompanyInfo] = useState(false);
@@ -35,6 +36,13 @@ const MyCompanies = () => {
     setShowCompanyInfo(false);
     setSelectedCompany(false);
     return
+  }
+
+  //handle delete
+  const handleDelete = async (id) => {
+    const loaded = await dispatch(delete_company(id))
+    setSelectedCompany(null)
+    setLoaded(loaded)
   }
 
   useEffect(() => {
@@ -101,6 +109,7 @@ const MyCompanies = () => {
                 <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.name}</div>
                 <div className={`applied-${companies_with_applications.includes(Number(key))}`}>{company.state}</div>
               </div>
+              <button id="delete_company" hidden={!user.admin} onClick={()=> handleDelete(key)}>X</button>
             </div>
           </div>
         )

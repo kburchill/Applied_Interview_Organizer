@@ -1,5 +1,6 @@
 const LOAD = "companies/LOAD";
 const ADD = "companies/ADD";
+const REMOVE = "companies/REMOVE";
 
 const load = companies => ({
   type: LOAD,
@@ -11,6 +12,10 @@ const add = company => ({
   payload: company
 })
 
+const remove = company => ({
+  type: REMOVE,
+  payload: company
+})
 
 //Get all companies
 export const get_companies = () => async (dispatch) => {
@@ -51,6 +56,22 @@ export const create_company = (info) => async (dispatch) => {
   return false;
 }
 
+//Delete an application
+export const delete_company = (company_id) => async (dispatch) => {
+  const response = await fetch(`/api/companies/${company_id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  if (response.ok) {
+    await response.json()
+    dispatch(remove(company_id))
+    return true;
+  }
+  return false;
+}
+
 const initialState = {}
 
 const companyReducer = (state = initialState, action) => {
@@ -61,6 +82,10 @@ const companyReducer = (state = initialState, action) => {
     case ADD:
       const new_company = action.payload.company
       state[new_company[0]] = new_company[1]
+    case REMOVE:
+      const key = action.payload;
+      delete state[key]
+      return state
     default:
       return state
   }

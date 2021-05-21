@@ -13,7 +13,7 @@ def seed_users():
     db.session.commit()
 
     demo2 = User(username="Kent", email="spork@spork.com",
-                password="sporknader")
+                password="sporknader", admin=True)
     db.session.add(demo2)
     db.session.commit()
 

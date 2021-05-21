@@ -7,6 +7,7 @@ import { get_companies } from "../store/companies"
 import { get_applications } from "../store/applications"
 import { get_interviews } from "../store/interviews"
 import NavBar from "../components/navbar"
+import Footer from "../components/footer"
 import './dashboard.css'
 
 
@@ -50,6 +51,7 @@ const MainBody = () => {
       {showCompanies && <MyCompanies />}
       {showApplications && <MyApplications />}
       {showInterviews && <MyInterviews />}
+      <Footer />
     </div>
   )
 }

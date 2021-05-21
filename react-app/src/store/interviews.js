@@ -69,11 +69,11 @@ export const get_application_interviews = (application_id) => async (dispatch) =
 
 //Fetch all interviews associated with company
 export const get_company_interviews = (company_id) => async (dispatch) => {
-    const response = await fetch(`/api/companies/${company_id}/interviews`, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+  const response = await fetch(`/api/companies/${company_id}/interviews`, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
 
   if (response.ok) {
     const interviews = await response.json();

@@ -111,7 +111,7 @@ const MyApplications = () => {
       completed: false,
       interview_type: info.interview_type
     }
-    
+
     if(interview_info.interview_id){
       await dispatch(update_interview(interview_info))
       info['interview_id'] = interview_info.interview_id
@@ -159,14 +159,12 @@ const MyApplications = () => {
   }
 
   const renderApplications = () => {
-    console.log("WE HIT UP TOP",)
     return (
       companies && interviews && applications && Object.keys(applications).map(key => {
         const current_application = applications[key]
 
         let interview_date = null;
         if (interviews.interviews[current_application.interview_id]) {
-          console.log("WE HIT THIS HERE")
           interview_date = new Date(interviews.interviews[current_application.interview_id].date)
           interview_date = interview_date.toISOString().substring(0, 10)
         }

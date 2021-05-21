@@ -20,7 +20,7 @@ body {
 	grid-template-rows: 50px 1fr;
 	grid-template-areas:
 		"navbar navbar navbar"
-		"labels body info";
+		"labels body info"
 }
 
 
@@ -28,6 +28,19 @@ body {
   grid-area: navbar;
 }
 
+.footer-block {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+}
+
+.footer-block > * {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  margin-left: 5px;
+  font-size: 20px;
+}
 
 #interviews-form, #applications-form, #companies-form {
 grid-area: info;

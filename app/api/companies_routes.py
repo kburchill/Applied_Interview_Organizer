@@ -107,4 +107,4 @@ def company_delete(company_id):
         db.session.delete(company_to_delete)
         db.session.commit()
         return {'message': 'Company Deleted.'}
-    return {'message': "Access denied"}
+    return {'message': "Access denied"}, 400

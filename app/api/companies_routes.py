@@ -94,8 +94,8 @@ def company_delete(company_id):
     """
     Deletes a company
     """
+    print(company_id, current_user, current_user.admin)
     if current_user.admin:
-
         company_to_delete = Company.query.get(company_id)
         applications_present = Application.query.filter(
             Application.company_id == company_id).all()

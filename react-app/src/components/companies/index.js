@@ -12,7 +12,7 @@ const MyCompanies = () => {
   const user = useSelector(state => state.session.user);
 
   const [showNewCompanyForm, setShowNewCompanyForm] = useState(false);
-  const [showCompanyInfo, setShowCompanyInfo] = useState(false);
+  // const [showCompanyInfo, setShowCompanyInfo] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState()
   const [loaded, setLoaded] = useState(false);
 
@@ -28,12 +28,12 @@ const MyCompanies = () => {
   const openCompanyInfo = (company_id) => {
     closeCompanyInfo();
     setSelectedCompany(company_id)
-    setShowCompanyInfo(true);
+    // setShowCompanyInfo(true);
   }
 
   const closeCompanyInfo = () => {
     setShowNewCompanyForm(false);
-    setShowCompanyInfo(false);
+    // setShowCompanyInfo(false);
     setSelectedCompany(false);
     return
   }

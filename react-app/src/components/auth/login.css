@@ -46,9 +46,12 @@ html {
 
 }
 
+#password_input, #email_input {
+  width: 100px;
+}
 .login-form-div__row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .login-form-div > * > * > input:focus {

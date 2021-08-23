@@ -9,10 +9,9 @@ export const form_info = () => {
 }
 
 const CreateCompanyForm = () => {
-  //Stores
   const user = useSelector(state => state.session.user)
 
-  //States
+
   const [name, setName] = useState();
   const [state, setState] = useState();
   const [city, setCity] = useState();

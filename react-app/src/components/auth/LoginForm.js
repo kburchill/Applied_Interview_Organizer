@@ -44,18 +44,20 @@ const LoginForm = () => {
             <div className="login-form-div__row">
               <label htmlFor="email">Email</label>
               <input
+                id="email_input"
                 name="email"
                 type="text"
-                placeholder="email"
+                placeholder="Email"
                 value={email}
                 onChange={updateEmail}
                 autoComplete="off"
               />
             </div>
 
-            <div>
+            <div className="login-form-div__row">
               <label htmlFor="password">Password</label>
               <input
+                id="password_input"
                 name="password"
                 type="password"
                 placeholder="Password"

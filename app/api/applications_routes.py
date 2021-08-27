@@ -33,6 +33,7 @@ def application_data():
                 })
             applications[application.id] = application_info[0]
         return applications
+    return {"message": "Access denied"}, 400
 
 
 @application_routes.route("/<int:application_id>/interviews")
@@ -75,6 +76,7 @@ def create_application():
         application = {'application': [
             new_application.id, application_info[0]]}
         return application
+    return {"message": "Access denied"}, 400
 
 
 # Patch Routes

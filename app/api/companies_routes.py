@@ -28,6 +28,7 @@ def company_data():
             })
             companies[company.id] = company_info[0]
         return companies
+    return {"message": "Access denied"}, 400
 
 
 @company_routes.route("/<int:company_id>/applications")
